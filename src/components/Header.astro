@@ -1,0 +1,271 @@
+---
+import Wordmark from './Wordmark.astro';
+import { nav } from '../data/site';
+
+const path = Astro.url.pathname;
+const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+const links = nav.filter((n) => n.href !== '/contact/');
+---
+
+<header class="site-header" data-header>
+  <div class="container site-header__inner">
+    <a href="/" class="site-header__brand">
+      <Wordmark />
+    </a>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-nav"
+      data-menu-toggle
+    >
+      <span class="menu-toggle__bars" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="menu-toggle__label">Menu</span>
+    </button>
+
+    <nav id="site-nav" class="site-nav" aria-label="Main" data-menu>
+      <ul class="site-nav__list">
+        {
+          links.map((l) => (
+            <li>
+              <a href={l.href} class="site-nav__link" aria-current={isCurrent(l.href) ? 'page' : undefined}>
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+        <li class="site-nav__cta-item">
+          <a
+            href="/contact/"
+            class="btn btn--accent site-nav__cta"
+            aria-current={isCurrent('/contact/') ? 'page' : undefined}
+          >
+            Contact
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.querySelector<HTMLElement>('[data-menu]');
+  const label = toggle?.querySelector('.menu-toggle__label');
+
+  const setOpen = (open: boolean, returnFocus = false) => {
+    if (!toggle || !menu || !header) return;
+    toggle.setAttribute('aria-expanded', String(open));
+    header.classList.toggle('is-open', open);
+    document.body.classList.toggle('menu-open', open);
+    if (label) label.textContent = open ? 'Close' : 'Menu';
+    if (open) menu.querySelector<HTMLAnchorElement>('a')?.focus();
+    else if (returnFocus) toggle.focus();
+  };
+
+  toggle?.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && header?.classList.contains('is-open')) setOpen(false, true);
+  });
+
+  // Close if the viewport grows to desktop while open
+  const mq = window.matchMedia('(min-width: 960px)');
+  mq.addEventListener('change', (e) => e.matches && setOpen(false));
+
+  // Gentle shadow once the page scrolls
+  const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgb(250 247 242 / 0.94);
+    backdrop-filter: saturate(140%) blur(10px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    border-bottom: 1px solid transparent;
+    transition:
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  .site-header.is-scrolled {
+    border-bottom-color: var(--taupe);
+    box-shadow: 0 6px 24px -18px rgb(48 51 47 / 0.35);
+  }
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    min-height: var(--header-h);
+  }
+  .site-header__brand {
+    text-decoration: none;
+    color: inherit;
+    padding-block: 0.6rem;
+  }
+
+  .site-nav__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: clamp(0.25rem, 0.2rem + 0.6vw, 1rem);
+  }
+  .site-nav__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 0.55rem;
+    color: var(--charcoal);
+    font-weight: 500;
+    font-size: 0.98rem;
+    text-decoration: none;
+  }
+  .site-nav__link::after {
+    content: '';
+    position: absolute;
+    left: 0.55rem;
+    right: 0.55rem;
+    bottom: 8px;
+    height: 1.5px;
+    background: var(--terracotta);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+  .site-nav__link:hover {
+    color: var(--charcoal);
+  }
+  .site-nav__link:hover::after,
+  .site-nav__link[aria-current='page']::after {
+    transform: scaleX(1);
+  }
+  .site-nav__link[aria-current='page'] {
+    font-weight: 650;
+  }
+  .site-nav__cta-item {
+    margin-left: 0.6rem;
+  }
+  .site-nav__cta {
+    min-height: 44px;
+    padding: 0.55rem 1.35rem;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 959.98px) {
+    :global(html.js) .menu-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      min-height: 44px;
+      padding: 0.5rem 0.95rem;
+      border-radius: 999px;
+      border: 1.5px solid var(--charcoal);
+      background: transparent;
+      color: var(--charcoal);
+      font: 600 0.95rem var(--font-sans);
+      cursor: pointer;
+    }
+    .menu-toggle__bars {
+      display: grid;
+      gap: 4px;
+      width: 18px;
+    }
+    .menu-toggle__bars span {
+      height: 1.5px;
+      background: currentColor;
+      border-radius: 2px;
+      transition:
+        transform 0.25s ease,
+        opacity 0.2s ease;
+    }
+    .is-open .menu-toggle__bars span:nth-child(1) {
+      transform: translateY(5.5px) rotate(45deg);
+    }
+    .is-open .menu-toggle__bars span:nth-child(2) {
+      opacity: 0;
+    }
+    .is-open .menu-toggle__bars span:nth-child(3) {
+      transform: translateY(-5.5px) rotate(-45deg);
+    }
+
+    /* Without JavaScript the links simply wrap below the logo */
+    .site-header__inner {
+      flex-wrap: wrap;
+    }
+    .site-nav {
+      width: 100%;
+    }
+    .site-nav__list {
+      flex-wrap: wrap;
+      padding-bottom: 0.75rem;
+    }
+
+    :global(html.js) .site-header__inner {
+      flex-wrap: nowrap;
+    }
+    :global(html.js) .site-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      height: calc(100dvh - var(--header-h));
+      overflow-y: auto;
+      background: var(--ivory);
+      border-top: 1px solid var(--taupe);
+      padding: 1.5rem var(--gutter) 3rem;
+    }
+    :global(html.js) .is-open .site-nav {
+      display: block;
+    }
+    :global(html.js) .site-nav__list {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+    }
+    :global(html.js) .site-nav__list li {
+      border-bottom: 1px solid var(--taupe);
+    }
+    :global(html.js) .site-nav__link {
+      width: 100%;
+      min-height: 60px;
+      padding: 0;
+      font-family: var(--font-serif);
+      font-size: 1.65rem;
+      font-weight: 400;
+    }
+    :global(html.js) .site-nav__link::after {
+      display: none;
+    }
+    :global(html.js) .site-nav__link[aria-current='page'] {
+      color: var(--terra-deep);
+      font-weight: 450;
+    }
+    :global(html.js) .site-nav__cta-item {
+      border-bottom: 0 !important;
+      margin: 1.75rem 0 0;
+    }
+    :global(html.js) .site-nav__cta {
+      width: 100%;
+      min-height: 54px;
+      font-size: 1.05rem;
+    }
+  }
+  :global(body.menu-open) {
+    overflow: hidden;
+  }
+</style>

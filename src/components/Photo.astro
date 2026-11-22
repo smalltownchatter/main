@@ -1,0 +1,77 @@
+---
+/**
+ * Responsive photo. Looks the photo up by name in src/data/images.ts.
+ *   <Photo name="bakery-counter" ratio="4/5" sizes="(min-width: 900px) 50vw, 100vw" />
+ * Unsplash photos are resized/cropped by Unsplash's CDN (AVIF/WebP automatically).
+ * Local photos in src/assets/photos/ are optimized by Astro at build time.
+ */
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { photos, type PhotoName, type Photo } from '../data/images';
+
+interface Props {
+  name: PhotoName;
+  ratio?: string; // "4/5", "3/2", "1/1"…
+  sizes?: string;
+  eager?: boolean;
+  class?: string;
+  alt?: string; // override the default alt text ("" for decorative)
+}
+const { name, ratio = '4/5', sizes = '(min-width: 900px) 50vw, 100vw', eager = false, class: className, alt } = Astro.props;
+
+const p = photos[name] as Photo;
+if (!p) throw new Error(`Unknown photo "${name}" — check src/data/images.ts`);
+
+const [rw, rh] = ratio.split('/').map(Number);
+const altText = alt ?? p.alt;
+const widths = [480, 720, 960, 1280, 1680, 2100];
+const baseW = 1200;
+const baseH = Math.round((baseW * rh) / rw);
+
+let unsplashSrcset = '';
+let unsplashSrc = '';
+let local: ImageMetadata | undefined;
+
+if ('unsplash' in p) {
+  const url = (w: number) =>
+    `https://images.unsplash.com/${p.unsplash}?auto=format&fit=crop&crop=faces%2Centropy&q=68&w=${w}&h=${Math.round((w * rh) / rw)}`;
+  unsplashSrcset = widths.map((w) => `${url(w)} ${w}w`).join(', ');
+  unsplashSrc = url(baseW);
+} else {
+  const files = import.meta.glob<{ default: ImageMetadata }>('/src/assets/photos/*.{jpg,jpeg,png,webp,avif}', {
+    eager: true,
+  });
+  local = files[`/src/assets/photos/${p.file}`]?.default;
+  if (!local) throw new Error(`Photo file src/assets/photos/${p.file} not found`);
+}
+---
+
+<div class:list={['photo', className]} style={`aspect-ratio:${rw}/${rh}`}>
+  {
+    local ? (
+      <Picture
+        src={local}
+        alt={altText}
+        widths={widths.filter((w) => w <= local.width)}
+        sizes={sizes}
+        formats={['avif', 'webp']}
+        loading={eager ? 'eager' : 'lazy'}
+        fetchpriority={eager ? 'high' : 'auto'}
+        style={p.focus ? `object-position:${p.focus}` : undefined}
+      />
+    ) : (
+      <img
+        src={unsplashSrc}
+        srcset={unsplashSrcset}
+        sizes={sizes}
+        width={baseW}
+        height={baseH}
+        alt={altText}
+        loading={eager ? 'eager' : 'lazy'}
+        fetchpriority={eager ? 'high' : 'auto'}
+        decoding={eager ? 'sync' : 'async'}
+        style={p.focus ? `object-position:${p.focus}` : undefined}
+      />
+    )
+  }
+</div>

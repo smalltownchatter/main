@@ -1,0 +1,126 @@
+---
+/**
+ * PRIVACY POLICY — plain-language and intentionally basic.
+ * It describes how this site actually works today. If you add analytics,
+ * a booking tool, a newsletter or anything else that collects information,
+ * update this page (and the "Last updated" date) at the same time.
+ * Consider having it reviewed by a professional if your situation changes.
+ */
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+const updated = 'November 21, 2026';
+---
+
+<Base
+  title="Privacy Policy | Small Town Chatter"
+  description="How Small Town Chatter collects, uses and protects the information you share through the contact form or by email."
+>
+  <section class="page-hero privacy-hero" aria-labelledby="page-title">
+    <div class="container--narrow">
+      <p class="eyebrow">Privacy Policy</p>
+      <h1 id="page-title">Your information, <span class="accent">handled with care.</span></h1>
+      <p class="lede">
+        Here’s a plain-language explanation of what information this website collects, why, and what I do with it.
+      </p>
+      <p class="fine">Last updated: {updated}</p>
+    </div>
+  </section>
+
+  <section class="section prose-wrap">
+    <div class="container--narrow prose">
+      <h2>Who I am</h2>
+      <p>
+        This website is run by {site.owner}, owner of {site.name}, a small business offering website design and
+        photography in the Ottawa Valley, Ontario, Canada. If you have any questions about this policy or your information,
+        email me at <a href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+
+      <h2>What information I collect</h2>
+      <p>When you send a message through the contact form, I receive the information you choose to provide:</p>
+      <ul>
+        <li>Your name and email address</li>
+        <li>Your business name, town or location, and event date (if you include them)</li>
+        <li>The service you’re asking about and the message you write</li>
+      </ul>
+      <p>
+        If you email me directly, I receive your email address and whatever you include in your message. I don’t ask for
+        sensitive information through this website, so please don’t include things like payment details in the form.
+      </p>
+
+      <h2>How I use it</h2>
+      <p>I use the information you send only to:</p>
+      <ul>
+        <li>Reply to your inquiry and answer your questions</li>
+        <li>Prepare a quote or proposal you’ve asked for</li>
+        <li>Keep a record of our conversation if we end up working together</li>
+      </ul>
+      <p>
+        I won’t sell, rent or trade your information, and I won’t add you to a mailing list or send you marketing messages
+        without your permission.
+      </p>
+
+      <h2>How contact form messages are handled</h2>
+      <p>
+        This website is hosted on Netlify, and the contact form is processed by Netlify’s form-handling service. When you
+        submit the form, Netlify receives and stores the submission and sends a notification to my email inbox (a Gmail
+        account provided by Google). Netlify also uses automated spam filtering on form submissions. These service providers
+        may store and process information outside of Canada. You can read more in
+        <a href="https://www.netlify.com/privacy/" rel="noopener">Netlify’s privacy policy</a> and
+        <a href="https://policies.google.com/privacy" rel="noopener">Google’s privacy policy</a>.
+      </p>
+
+      <h2>How long I keep it</h2>
+      <p>
+        I keep inquiries only as long as I reasonably need them to respond to you, provide any services we agree on and keep
+        ordinary business records. After that, I delete them.
+      </p>
+
+      <h2>Cookies and tracking</h2>
+      <p>
+        This website doesn’t use advertising cookies, and it doesn’t currently use analytics or tracking tools. Like any
+        website, the servers that deliver it (Netlify for the site, and Unsplash for some of the stock photographs) may
+        automatically log basic technical information, such as your IP address and browser type, to deliver and secure
+        their services.
+      </p>
+
+      <h2>Your choices</h2>
+      <p>
+        You can ask me at any time what information I have about you, ask me to correct it, or ask me to delete it. Just
+        email <a href={`mailto:${site.email}`}>{site.email}</a> and I’ll take care of it.
+      </p>
+
+      <h2>Changes to this policy</h2>
+      <p>
+        If the way this website handles information changes, I’ll update this page and the “Last updated” date above.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .privacy-hero h1 {
+    font-size: var(--step-4);
+  }
+  .prose-wrap {
+    padding-top: 0;
+  }
+  .prose {
+    max-width: 44rem;
+  }
+  .prose h2 {
+    font-size: var(--step-2);
+    margin-top: 2.5rem;
+  }
+  .prose h2:first-child {
+    margin-top: 0;
+  }
+  .prose p,
+  .prose li {
+    color: var(--charcoal);
+  }
+  .prose ul {
+    margin: 0 0 1.1em;
+    display: grid;
+    gap: 0.35rem;
+  }
+</style>

@@ -1,0 +1,146 @@
+---
+import { money, type WebsitePackage } from '../data/packages';
+
+interface Props {
+  pkg: WebsitePackage;
+  featured?: boolean;
+  compact?: boolean; // homepage preview
+  headingLevel?: 'h3' | 'h4';
+}
+const { pkg, featured = false, compact = false, headingLevel = 'h3' } = Astro.props;
+const H = headingLevel;
+const contactHref = `/contact/?service=${pkg.id}`;
+---
+
+<article class:list={['price', { 'price--featured': featured, 'price--compact': compact }]} aria-labelledby={`pkg-${pkg.id}${compact ? '-c' : ''}`}>
+  {featured && !compact && <p class="price__flag">Most room to grow</p>}
+  <H class="price__name" id={`pkg-${pkg.id}${compact ? '-c' : ''}`}>{pkg.name}</H>
+  <p class="price__pages">{pkg.pages}</p>
+  <p class="price__amount">
+    <span class="price__num">{money(pkg.price)}</span>
+    <span class="price__unit">all-in <abbr title="Canadian dollars">CAD</abbr></span>
+  </p>
+  {
+    compact ? null : (
+      <>
+        <p class="price__summary">{pkg.summary}</p>
+        {pkg.includesPrevious && <p class="price__includes">{pkg.includesPrevious}</p>}
+        <ul class="checklist price__list">
+          {pkg.features.map((f) => (
+            <li>{f}</li>
+          ))}
+        </ul>
+        {pkg.examplePages && (
+          <p class="price__example">
+            <span>Example pages:</span> {pkg.examplePages}
+          </p>
+        )}
+        <a class:list={['btn', featured ? 'btn--accent' : 'btn--ghost', 'price__btn']} href={contactHref}>
+          {pkg.cta}
+        </a>
+      </>
+    )
+  }
+</article>
+
+<style>
+  .price {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    border: 1px solid var(--taupe);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.75rem, 1.3rem + 2vw, 2.75rem);
+  }
+  .price--featured {
+    border: 2px solid var(--terracotta);
+    box-shadow: var(--shadow);
+  }
+  .price__flag {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--terra-deep);
+    color: var(--white);
+    border-radius: 999px;
+    padding: 0.4rem 0.95rem;
+  }
+  .price__name {
+    font-size: var(--step-3);
+    margin: 0 0 0.2rem;
+  }
+  .price--compact .price__name {
+    font-size: var(--step-2);
+  }
+  .price__pages {
+    color: var(--muted);
+    font-weight: 500;
+    margin: 0;
+  }
+  .price__amount {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1.25rem 0 1.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--taupe);
+  }
+  .price--compact .price__amount {
+    border-bottom: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+  .price__num {
+    font-family: var(--font-serif);
+    font-size: clamp(2.6rem, 2rem + 2.5vw, 3.6rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .price__unit {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terra-deep);
+  }
+  .price__unit abbr {
+    text-decoration: none;
+  }
+  .price__summary {
+    color: var(--charcoal);
+  }
+  .price__includes {
+    font-weight: 650;
+    margin: 0.25rem 0 0.9rem;
+  }
+  .price__list {
+    margin-bottom: 1.5rem;
+  }
+  .price__example {
+    font-size: 0.95rem;
+    color: var(--muted);
+    background: var(--paper);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+  }
+  .price__example span {
+    font-weight: 650;
+    color: var(--charcoal);
+  }
+  .price__btn {
+    margin-top: auto;
+    width: 100%;
+  }
+  .price__list + .price__btn {
+    margin-top: auto;
+  }
+</style>

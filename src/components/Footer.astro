@@ -1,0 +1,123 @@
+---
+import Wordmark from './Wordmark.astro';
+import { site, nav } from '../data/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer on-dark">
+  <div class="container">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <a href="/" class="site-footer__logo">
+          <Wordmark size="lg" tone="light" />
+        </a>
+        <p class="site-footer__tagline">{site.tagline}</p>
+      </div>
+
+      <div class="site-footer__about">
+        <p>{site.description}</p>
+        <p>Serving {site.towns.join(', ')} and beyond.</p>
+        <p class="site-footer__email">
+          <span class="visually-hidden">Email: </span>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </p>
+      </div>
+
+      <nav class="site-footer__nav" aria-label="Footer">
+        <ul>
+          {nav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+          <li><a href="/privacy/">Privacy Policy</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="site-footer__bottom">
+      <p>
+        © <span data-year>{year}</span> {site.name}. All rights reserved.
+      </p>
+      <p>Made with small-town heart in the Ottawa Valley.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Keep the copyright year current even if the site isn't rebuilt
+  document.querySelectorAll('[data-year]').forEach((el) => (el.textContent = String(new Date().getFullYear())));
+</script>
+
+<style>
+  .site-footer {
+    background: var(--charcoal);
+    color: #e9e4dc;
+    padding-block: clamp(3.5rem, 2.5rem + 4vw, 5.5rem) 2rem;
+    font-size: 0.98rem;
+  }
+  .site-footer a {
+    color: var(--ivory);
+    text-decoration-color: rgb(250 247 242 / 0.4);
+  }
+  .site-footer a:hover {
+    color: var(--blush);
+    text-decoration-color: currentColor;
+  }
+  .site-footer__top {
+    display: grid;
+    gap: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgb(250 247 242 / 0.16);
+  }
+  @media (min-width: 860px) {
+    .site-footer__top {
+      grid-template-columns: 1.1fr 1.2fr 0.7fr;
+      gap: 3.5rem;
+    }
+  }
+  .site-footer__logo {
+    text-decoration: none;
+    display: inline-block;
+  }
+  .site-footer__tagline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 1.4;
+    margin-top: 1.25rem;
+    color: var(--ivory);
+    max-width: 24ch;
+  }
+  .site-footer__about p {
+    margin-bottom: 0.9rem;
+  }
+  .site-footer__email a {
+    font-weight: 600;
+    font-size: 1.08rem;
+  }
+  .site-footer__nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.15rem;
+  }
+  .site-footer__nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    text-decoration: none;
+  }
+  .site-footer__nav a:hover {
+    text-decoration: underline;
+  }
+  .site-footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    padding-top: 1.5rem;
+    font-size: 0.88rem;
+    color: #cfc9c0;
+  }
+  .site-footer__bottom p {
+    margin: 0;
+  }
+</style>

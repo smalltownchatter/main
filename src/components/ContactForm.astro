@@ -1,0 +1,501 @@
+---
+/**
+ * Contact form — handled by Netlify Forms (no API keys, nothing secret in the page).
+ * Netlify detects this form at deploy time because of `data-netlify="true"`.
+ * Submissions appear in Netlify → Forms, and Netlify emails them to you once
+ * you add a form notification (see README → "Contact form setup").
+ *
+ * Preselect a service with a link like /contact/?service=little-local
+ * (ids are in src/data/packages.ts → inquiryOptions).
+ */
+import { inquiryOptions } from '../data/packages';
+import { site } from '../data/site';
+---
+
+<div class="cform" data-cform>
+  <form
+    name="contact"
+    method="POST"
+    action="/contact/thanks/"
+    data-netlify="true"
+    netlify-honeypot="bot-field"
+    novalidate
+    class="cform__form"
+    aria-describedby="cform-required-note"
+    data-cform-form
+  >
+    <input type="hidden" name="form-name" value="contact" />
+    <input type="hidden" name="subject" value="New Small Town Chatter inquiry" data-subject />
+    <p class="visually-hidden" aria-hidden="true">
+      <label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+    </p>
+
+    <div class="cform__summary" role="alert" tabindex="-1" hidden data-summary>
+      <p class="cform__summary-title">Please fix the following before sending:</p>
+      <ul data-summary-list></ul>
+    </div>
+
+    <p id="cform-required-note" class="cform__req-note">Fields marked <span class="req" aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required.</p>
+
+    <div class="cform__row">
+      <div class="field">
+        <label for="cf-name">Name <span class="req" aria-hidden="true">*</span></label>
+        <input id="cf-name" name="name" type="text" autocomplete="name" required aria-describedby="cf-name-err" />
+        <p class="field__error" id="cf-name-err" data-error></p>
+      </div>
+      <div class="field">
+        <label for="cf-email">Email address <span class="req" aria-hidden="true">*</span></label>
+        <input
+          id="cf-email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          inputmode="email"
+          spellcheck="false"
+          required
+          aria-describedby="cf-email-err"
+        />
+        <p class="field__error" id="cf-email-err" data-error></p>
+      </div>
+    </div>
+
+    <div class="cform__row">
+      <div class="field">
+        <label for="cf-business">Business name <span class="opt">(optional)</span></label>
+        <input id="cf-business" name="business" type="text" autocomplete="organization" />
+      </div>
+      <div class="field">
+        <label for="cf-town">Town or location <span class="opt">(optional)</span></label>
+        <input id="cf-town" name="location" type="text" autocomplete="address-level2" placeholder="e.g. Renfrew" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="cf-service">What can I help you with? <span class="req" aria-hidden="true">*</span></label>
+      <div class="select">
+        <select id="cf-service" name="service" required aria-describedby="cf-service-err" data-service>
+          <option value="">Choose one…</option>
+          {inquiryOptions.map((o) => <option value={o.label} data-id={o.id}>{o.label}</option>)}
+        </select>
+      </div>
+      <p class="field__error" id="cf-service-err" data-error></p>
+    </div>
+
+    <div class="field" data-event-date>
+      <label for="cf-date">Event date <span class="opt" data-date-hint>(optional, for event photography)</span></label>
+      <input id="cf-date" name="event-date" type="date" aria-describedby="cf-date-help" />
+      <p class="field__help" id="cf-date-help">Not set yet? No problem. Leave it blank.</p>
+    </div>
+
+    <div class="field">
+      <label for="cf-message">Tell me a little more <span class="req" aria-hidden="true">*</span></label>
+      <textarea
+        id="cf-message"
+        name="message"
+        rows="6"
+        required
+        aria-describedby="cf-message-help cf-message-err"
+      ></textarea>
+      <p class="field__help" id="cf-message-help">
+        What does your business do, or what are you celebrating? Anything you’d like me to know is helpful.
+      </p>
+      <p class="field__error" id="cf-message-err" data-error></p>
+    </div>
+
+    <p class="cform__privacy">
+      I’ll only use your details to reply to your inquiry. See the <a href="/privacy/">Privacy Policy</a> for how form
+      messages are handled.
+    </p>
+
+    <div class="cform__status" role="alert" hidden data-error-box>
+      <p class="cform__status-title">Sorry, your message didn’t send.</p>
+      <p>
+        Something went wrong on our end. Your message is still here, so please try again in a moment, or email me directly
+        at <a href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+    </div>
+
+    <button type="submit" class="btn btn--accent cform__submit" data-submit>
+      <span class="cform__spinner" aria-hidden="true"></span>
+      <span data-submit-label>Send My Message</span>
+    </button>
+    <p class="visually-hidden" role="status" aria-live="polite" data-live></p>
+  </form>
+
+  <div class="cform__success" hidden tabindex="-1" data-success>
+    <div class="cform__success-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+    </div>
+    <h2 class="cform__success-title">Your message is on its way!</h2>
+    <p>Thanks so much for reaching out to Small Town Chatter.</p>
+    <p>
+      I’m looking forward to hearing more about your business or special event, and I’ll be in touch as soon as I can.
+    </p>
+  </div>
+</div>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-cform]');
+  const form = root?.querySelector<HTMLFormElement>('[data-cform-form]');
+
+  if (root && form) {
+    const service = form.querySelector<HTMLSelectElement>('[data-service]')!;
+    const dateField = form.querySelector<HTMLElement>('[data-event-date]')!;
+    const dateInput = dateField.querySelector('input')!;
+    const dateHint = form.querySelector<HTMLElement>('[data-date-hint]');
+    const subject = form.querySelector<HTMLInputElement>('[data-subject]')!;
+    const summary = form.querySelector<HTMLElement>('[data-summary]')!;
+    const summaryList = form.querySelector<HTMLElement>('[data-summary-list]')!;
+    const errorBox = form.querySelector<HTMLElement>('[data-error-box]')!;
+    const submit = form.querySelector<HTMLButtonElement>('[data-submit]')!;
+    const submitLabel = form.querySelector<HTMLElement>('[data-submit-label]')!;
+    const live = form.querySelector<HTMLElement>('[data-live]')!;
+    const success = root.querySelector<HTMLElement>('[data-success]')!;
+
+    // ── Preselect from ?service=… ─────────────────────────────
+    const wanted = new URLSearchParams(location.search).get('service');
+    if (wanted) {
+      const opt = [...service.options].find((o) => o.dataset.id === wanted);
+      if (opt) service.value = opt.value;
+    }
+
+    // ── Event date only for event photography ────────────────
+    const isEvent = () => service.selectedOptions[0]?.dataset.id === 'event-photography';
+    const syncDate = () => {
+      const show = isEvent();
+      dateField.hidden = !show;
+      if (!show) dateInput.value = '';
+      if (dateHint) dateHint.textContent = '(optional)';
+    };
+    syncDate();
+    service.addEventListener('change', syncDate);
+
+    // ── Validation ────────────────────────────────────────────
+    const emailOk = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+    const rules: { id: string; label: string; check: (el: HTMLInputElement) => string }[] = [
+      { id: 'cf-name', label: 'Name', check: (el) => (el.value.trim() ? '' : 'Please enter your name.') },
+      {
+        id: 'cf-email',
+        label: 'Email address',
+        check: (el) =>
+          !el.value.trim()
+            ? 'Please enter your email address.'
+            : !emailOk(el.value.trim())
+              ? 'Please enter a valid email address, like name@example.com.'
+              : '',
+      },
+      { id: 'cf-service', label: 'What can I help you with?', check: (el) => (el.value ? '' : 'Please choose what I can help you with.') },
+      { id: 'cf-message', label: 'Tell me a little more', check: (el) => (el.value.trim() ? '' : 'Please tell me a little about what you need.') },
+    ];
+
+    const showError = (el: HTMLElement, msg: string) => {
+      const err = document.getElementById(`${el.id}-err`);
+      if (err) err.textContent = msg;
+      if (msg) el.setAttribute('aria-invalid', 'true');
+      else el.removeAttribute('aria-invalid');
+      el.closest('.field')?.classList.toggle('field--invalid', !!msg);
+    };
+
+    const validate = () => {
+      const problems: { id: string; msg: string }[] = [];
+      for (const r of rules) {
+        const el = document.getElementById(r.id) as HTMLInputElement;
+        const msg = r.check(el);
+        showError(el, msg);
+        if (msg) problems.push({ id: r.id, msg });
+      }
+      return problems;
+    };
+
+    // Re-check a field as soon as it's fixed
+    for (const r of rules) {
+      const el = document.getElementById(r.id) as HTMLInputElement;
+      const recheck = () => {
+        if (el.getAttribute('aria-invalid') === 'true') showError(el, r.check(el));
+      };
+      el.addEventListener('input', recheck);
+      el.addEventListener('change', recheck);
+      el.addEventListener('blur', () => {
+        if (el.value) showError(el, r.check(el));
+      });
+    }
+
+    let sending = false;
+    const setSending = (on: boolean) => {
+      sending = on;
+      form.setAttribute('aria-busy', String(on));
+      submit.setAttribute('aria-disabled', String(on));
+      submit.classList.toggle('is-loading', on);
+      submitLabel.textContent = on ? 'Sending…' : 'Send My Message';
+      live.textContent = on ? 'Sending your message…' : '';
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (sending) return;
+      errorBox.hidden = true;
+
+      const problems = validate();
+      if (problems.length) {
+        summaryList.innerHTML = '';
+        for (const p of problems) {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = `#${p.id}`;
+          a.textContent = p.msg;
+          a.addEventListener('click', (ev) => {
+            ev.preventDefault();
+            document.getElementById(p.id)?.focus();
+          });
+          li.append(a);
+          summaryList.append(li);
+        }
+        summary.hidden = false;
+        summary.focus();
+        return;
+      }
+      summary.hidden = true;
+
+      const name = (document.getElementById('cf-name') as HTMLInputElement).value.trim();
+      subject.value = `New inquiry: ${service.value} (from ${name})`;
+
+      setSending(true);
+      try {
+        const body = new URLSearchParams(new FormData(form) as unknown as Record<string, string>).toString();
+        const res = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded', Accept: 'text/html' },
+          body,
+        });
+        if (!res.ok) throw new Error(`Form endpoint responded ${res.status}`);
+        // Only now, after the server confirmed it, show success
+        form.hidden = true;
+        success.hidden = false;
+        success.focus();
+        success.scrollIntoView({ block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      } catch (err) {
+        console.warn('[contact form]', err);
+        errorBox.hidden = false;
+        errorBox.focus?.();
+      } finally {
+        setSending(false);
+      }
+    });
+  }
+</script>
+
+<style>
+  .cform {
+    background: var(--white);
+    border: 1px solid var(--taupe);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.5rem, 1rem + 3vw, 3rem);
+    box-shadow: var(--shadow);
+  }
+  .cform__form {
+    display: grid;
+    gap: 1.35rem;
+  }
+  .cform__row {
+    display: grid;
+    gap: 1.35rem;
+  }
+  @media (min-width: 640px) {
+    .cform__row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .cform__req-note {
+    font-size: 0.92rem;
+    color: var(--muted);
+    margin: 0;
+  }
+  .field {
+    display: grid;
+    gap: 0.45rem;
+    align-content: start;
+  }
+  .field[hidden] {
+    display: none;
+  }
+  .field label {
+    font-weight: 600;
+    font-size: 0.98rem;
+  }
+  .req {
+    color: var(--terra-deep);
+  }
+  .opt {
+    font-weight: 400;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    min-height: 50px;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid #8f928b; /* 3.3:1 against white for input boundaries */
+    border-radius: 12px;
+    background: var(--ivory);
+    color: var(--charcoal);
+    font: inherit;
+    font-size: 1rem; /* prevents iOS zoom */
+    line-height: 1.5;
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.15s ease,
+      background-color 0.15s ease;
+  }
+  .field textarea {
+    resize: vertical;
+    min-height: 150px;
+  }
+  .field input:hover,
+  .field select:hover,
+  .field textarea:hover {
+    border-color: var(--charcoal);
+  }
+  .field input:focus-visible,
+  .field select:focus-visible,
+  .field textarea:focus-visible {
+    outline: 3px solid var(--terra-deep);
+    outline-offset: 1px;
+    border-color: var(--charcoal);
+    background: var(--white);
+  }
+  .select {
+    position: relative;
+  }
+  .select select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 2.75rem;
+    cursor: pointer;
+  }
+  .select::after {
+    content: '';
+    position: absolute;
+    right: 1.1rem;
+    top: 50%;
+    width: 9px;
+    height: 9px;
+    border-right: 1.8px solid var(--charcoal);
+    border-bottom: 1.8px solid var(--charcoal);
+    transform: translateY(-70%) rotate(45deg);
+    pointer-events: none;
+  }
+  .field__help {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .field__error {
+    margin: 0;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #a3341f;
+  }
+  .field__error:empty {
+    display: none;
+  }
+  .field__error::before {
+    content: '! ';
+  }
+  .field--invalid input,
+  .field--invalid select,
+  .field--invalid textarea {
+    border-color: #a3341f;
+    background: #fff8f6;
+  }
+  .cform__summary,
+  .cform__status {
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    border: 1.5px solid #a3341f;
+    background: #fff4f1;
+  }
+  .cform__summary[hidden],
+  .cform__status[hidden] {
+    display: none;
+  }
+  .cform__summary-title,
+  .cform__status-title {
+    font-weight: 700;
+    color: #8a2b19;
+    margin-bottom: 0.4rem;
+  }
+  .cform__summary ul {
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+  .cform__summary a {
+    color: #8a2b19;
+  }
+  .cform__privacy {
+    font-size: 0.92rem;
+    color: var(--muted);
+    margin: 0;
+  }
+  .cform__submit {
+    justify-self: start;
+    min-width: 220px;
+    min-height: 54px;
+    font-size: 1.05rem;
+  }
+  @media (max-width: 480px) {
+    .cform__submit {
+      width: 100%;
+    }
+  }
+  .cform__submit.is-loading {
+    cursor: progress;
+    opacity: 0.9;
+  }
+  .cform__spinner {
+    display: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid rgb(255 255 255 / 0.4);
+    border-top-color: #fff;
+    animation: spin 0.8s linear infinite;
+  }
+  .is-loading .cform__spinner {
+    display: inline-block;
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .cform__success {
+    text-align: center;
+    padding: clamp(1rem, 0.5rem + 3vw, 2.5rem) 0;
+  }
+  .cform__success[hidden] {
+    display: none;
+  }
+  .cform__success:focus {
+    outline: none;
+  }
+  .cform__success-icon {
+    display: grid;
+    place-items: center;
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 1.25rem;
+    border-radius: 50%;
+    background: var(--sage-tint);
+    color: var(--sage-deep);
+  }
+  .cform__success-title {
+    font-size: var(--step-3);
+  }
+  .cform__success p {
+    max-width: 44ch;
+    margin-inline: auto;
+    color: var(--muted);
+  }
+</style>

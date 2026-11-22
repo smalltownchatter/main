@@ -1,0 +1,46 @@
+---
+/**
+ * Shown after a successful form submission when JavaScript is turned off
+ * (Netlify redirects here once it has accepted the message).
+ * With JavaScript on, the success message appears on the contact page itself.
+ */
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+  title="Thank You | Small Town Chatter"
+  description="Thanks for reaching out to Small Town Chatter."
+  noindex
+>
+  <section class="section">
+    <div class="container--narrow center thanks">
+      <div class="thanks__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+      </div>
+      <h1>Your message is on its way!</h1>
+      <p class="lede center">Thanks so much for reaching out to Small Town Chatter.</p>
+      <p class="muted center measure">
+        I’m looking forward to hearing more about your business or special event, and I’ll be in touch as soon as I can.
+      </p>
+      <div class="btn-row center">
+        <a class="btn" href="/">Back to the homepage</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .thanks h1 {
+    font-size: var(--step-4);
+  }
+  .thanks__icon {
+    display: grid;
+    place-items: center;
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    background: var(--sage-tint);
+    color: var(--sage-deep);
+  }
+</style>
