@@ -1,6 +1,6 @@
 # Image credits & licences
 
-All photographs currently on the site are **stock illustrations**, not Chelsey's own work and not client projects.
+The Unsplash photographs on the site are **stock illustrations**, not Chelsey's own work and not client projects.
 
 They come from [Unsplash](https://unsplash.com) and are used under the [Unsplash License](https://unsplash.com/license), which allows free commercial and non-commercial use without permission or required attribution. (Attribution is appreciated, so credits are recorded here.) The licence doesn't allow selling unaltered copies, or compiling the photos into a competing image service.
 
@@ -45,5 +45,6 @@ These came from Chelsey's "Small Town Chatter / Images" folder on November 21, 2
 | `baby-shower-friends.jpg` | Photography: "The best moments aren't always the posed ones" | _to confirm_ |
 | `candlelit-table-roses.jpg` | Photography: "The little details" | _to confirm_ |
 | `phone-and-monitor-website.jpg` | About: "My approach" | _to confirm_ |
-| `stone-bridge-autumn-river.jpg` | About: "Proud of where I come from" (from IMG_8233.HEIC) | Chelsey's own photo? _to confirm_ |
+| `stone-bridge-autumn-river.jpg` | About: "Proud of where I come from"; Home: photography card (from IMG_8233.HEIC) | Chelsey's own photo? _to confirm_ |
+| `ottawa-valley-coffee-storefront.jpg` | Home: hero main photo (from IMG_7277.HEIC) | Chelsey's own photo? _to confirm_ |
 | `chelsey-portrait.jpg` | About: portrait (from IMG_2331.JPG, location data removed) | Chelsey's own photo |

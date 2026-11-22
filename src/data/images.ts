@@ -183,6 +183,13 @@ export const photos = {
     file: 'stone-bridge-autumn-river.jpg',
     alt: 'An old stone arch bridge over a rocky river, with autumn trees behind it',
     w: 1200, h: 1600,
+    focus: '50% 45%',
+  },
+  'ottawa-valley-coffee-storefront': {
+    file: 'ottawa-valley-coffee-storefront.jpg',
+    alt: 'The Ottawa Valley Coffee storefront decorated with Christmas lights and trees on a snowy winter day',
+    w: 1500, h: 2000,
+    focus: '50% 40%',
   },
 } satisfies Record<string, Photo>;
 
