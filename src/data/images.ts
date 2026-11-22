@@ -142,6 +142,48 @@ export const photos = {
     alt: 'Autumn forest in red and gold along a winding Canadian river',
     w: 3, h: 2,
   },
+  // ── Photos supplied by Chelsey (src/assets/photos/) ──
+  'phone-and-monitor-website': {
+    file: 'phone-and-monitor-website.jpg',
+    alt: 'Hands holding a phone showing a website, in front of the same site on a desktop monitor',
+    w: 956, h: 630,
+  },
+  'laptop-photo-editing': {
+    file: 'laptop-photo-editing.jpg',
+    alt: 'Someone working on a laptop showing a grid of photos, with a camera on the desk',
+    w: 945, h: 630,
+  },
+  'boutique-owner': {
+    file: 'boutique-owner.jpg',
+    alt: 'A smiling boutique owner standing in her clothing and gift shop',
+    w: 758, h: 504,
+  },
+  'cafe-owner-apron': {
+    file: 'cafe-owner-apron.jpg',
+    alt: 'A café owner in a plaid apron standing proudly in front of her counter',
+    w: 1123, h: 628,
+    focus: '75% 40%',
+  },
+  'baby-shower-friends': {
+    file: 'baby-shower-friends.jpg',
+    alt: 'Friends gathered around a mom-to-be at a baby shower with a diaper cake and cupcakes',
+    w: 940, h: 630,
+  },
+  'candlelit-table-roses': {
+    file: 'candlelit-table-roses.jpg',
+    alt: 'A celebration table with blush roses, tall candles and crystal glasses',
+    w: 955, h: 630,
+  },
+  'sixtieth-birthday-friends': {
+    file: 'sixtieth-birthday-friends.jpg',
+    alt: 'Friends laughing around a table under gold 60 balloons at a birthday party',
+    w: 948, h: 630,
+  },
+  'stone-bridge-autumn-river': {
+    file: 'stone-bridge-autumn-river.jpg',
+    alt: 'An old stone arch bridge over a rocky river, with autumn trees behind it',
+    w: 1200, h: 1600,
+  },
 } satisfies Record<string, Photo>;
 
 export type PhotoName = keyof typeof photos;

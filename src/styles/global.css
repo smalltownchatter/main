@@ -414,6 +414,11 @@ ul {
   border-radius: var(--radius-lg);
   background: var(--paper);
 }
+.photo picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .photo img {
   width: 100%;
   height: 100%;

@@ -31,3 +31,18 @@ People appear in some photos, and Unsplash doesn't supply model releases. Treat 
 - Wordmark, favicon and icons: created for this project (no third-party assets).
 - Social sharing image (`public/og-image.jpg`): created for this project from the site's fonts (`scripts/og.html`).
 - Fonts: [Fraunces](https://fonts.google.com/specimen/Fraunces) and [DM Sans](https://fonts.google.com/specimen/DM+Sans), both SIL Open Font License, self-hosted via Fontsource.
+
+## Photos supplied by Chelsey
+
+These came from Chelsey's "Small Town Chatter / Images" folder on November 21, 2026. White borders were trimmed and they're optimized automatically at build time. **Before launch, confirm that you have the rights to use each one** (your own photo, or a licence that allows commercial website use), and note the source here.
+
+| File (src/assets/photos/) | Used on | Source / licence |
+|---|---|---|
+| `boutique-owner.jpg` | Home: website service card | _to confirm_ |
+| `sixtieth-birthday-friends.jpg` | Home: photography service card | _to confirm_ |
+| `laptop-photo-editing.jpg` | Websites: "Simple doesn't mean second best" | _to confirm_ |
+| `cafe-owner-apron.jpg` | Websites: business photography card | _to confirm_ |
+| `baby-shower-friends.jpg` | Photography: "The best moments aren't always the posed ones" | _to confirm_ |
+| `candlelit-table-roses.jpg` | Photography: "The little details" | _to confirm_ |
+| `phone-and-monitor-website.jpg` | About: "My approach" | _to confirm_ |
+| `stone-bridge-autumn-river.jpg` | About: "Proud of where I come from" (from IMG_8233.HEIC) | Chelsey's own photo? _to confirm_ |
