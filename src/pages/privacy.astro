@@ -7,7 +7,7 @@
  * Consider having it reviewed by a professional if your situation changes.
  */
 import Base from '../layouts/Base.astro';
-import { site } from '../data/site';
+import { site, gaId } from '../data/site';
 const updated = 'November 21, 2026';
 ---
 
@@ -76,9 +76,22 @@ const updated = 'November 21, 2026';
       </p>
 
       <h2>Cookies and tracking</h2>
+      {
+        gaId ? (
+          <p>
+            This website doesn’t use advertising cookies. It does use <strong>Google Analytics</strong> to understand, in
+            general terms, how many people visit and which pages they find useful. Google Analytics uses cookies to
+            collect information such as the pages you view, roughly where you’re visiting from (city or region), the type
+            of device and browser you use and how you found the site. I don’t use it to identify you personally, and
+            Google’s advertising features are turned off. You can block these cookies in your browser settings, or use
+            Google’s <a href="https://tools.google.com/dlpage/gaoptout">opt-out browser add-on</a>.
+          </p>
+        ) : (
+          <p>This website doesn’t use advertising cookies, and it doesn’t currently use analytics or tracking tools.</p>
+        )
+      }
       <p>
-        This website doesn’t use advertising cookies, and it doesn’t currently use analytics or tracking tools. Like any
-        website, the servers that deliver it (Netlify for the site, and Unsplash for some of the stock photographs) may
+        Like any website, the servers that deliver it (Netlify for the site, and Unsplash for some of the stock photographs) may
         automatically log basic technical information, such as your IP address and browser type, to deliver and secure
         their services.
       </p>

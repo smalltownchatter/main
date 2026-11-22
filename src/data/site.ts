@@ -70,3 +70,15 @@ export const allowIndexing: boolean =
   env.ALLOW_INDEXING === 'false'
     ? false
     : env.ALLOW_INDEXING === 'true' || env.CONTEXT === 'production';
+
+/**
+ * Google Analytics 4 measurement ID (looks like G-XXXXXXXXXX).
+ * Set GA_MEASUREMENT_ID in Netlify (Site configuration → Environment
+ * variables) or put it below. Analytics only loads on the live
+ * production site, never on previews or local builds, and the
+ * privacy policy updates itself to mention it.
+ */
+const GA_MEASUREMENT_ID: string | null = null;
+
+const gaCandidate = (env.GA_MEASUREMENT_ID || GA_MEASUREMENT_ID || '').trim().toUpperCase();
+export const gaId: string | null = allowIndexing && /^G-[A-Z0-9]{4,16}$/.test(gaCandidate) ? gaCandidate : null;

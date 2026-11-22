@@ -7,7 +7,7 @@ import frauncesLatin from '@fontsource-variable/fraunces/files/fraunces-latin-op
 import dmSansLatin from '@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2?url';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { site, siteUrl, allowIndexing } from '../data/site';
+import { site, siteUrl, allowIndexing, gaId } from '../data/site';
 
 interface Props {
   title: string;
@@ -78,6 +78,20 @@ const jsonLd = [baseSchema, ...schema];
 
     <script is:inline>document.documentElement.classList.add('js');</script>
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd.length === 1 ? jsonLd[0] : jsonLd)} />
+
+    {
+      gaId && (
+        <>
+          <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
+          <script is:inline define:vars={{ gaId }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', gaId, { allow_google_signals: false, allow_ad_personalization_signals: false });
+          </script>
+        </>
+      )
+    }
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
