@@ -46,3 +46,4 @@ These came from Chelsey's "Small Town Chatter / Images" folder on November 21, 2
 | `candlelit-table-roses.jpg` | Photography: "The little details" | _to confirm_ |
 | `phone-and-monitor-website.jpg` | About: "My approach" | _to confirm_ |
 | `stone-bridge-autumn-river.jpg` | About: "Proud of where I come from" (from IMG_8233.HEIC) | Chelsey's own photo? _to confirm_ |
+| `chelsey-portrait.jpg` | About: portrait (from IMG_2331.JPG, location data removed) | Chelsey's own photo |

@@ -29,8 +29,8 @@ export const site = {
    * To add your photo: put it in src/assets/photos/ (e.g. chelsey.jpg)
    * and set portrait: 'chelsey.jpg'.
    */
-  portrait: null as string | null,
-  portraitAlt: 'Chelsey, owner of Small Town Chatter',
+  portrait: 'chelsey-portrait.jpg' as string | null,
+  portraitAlt: 'Chelsey, owner of Small Town Chatter, smiling at her desk at home',
 };
 
 /** Main navigation, in display order. */
