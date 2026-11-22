@@ -1,0 +1,400 @@
+---
+/**
+ * EVENT PHOTOGRAPHY PAGE
+ * Event types live in src/data/events.ts.
+ * Note: no prices, turnaround times or image counts are published yet,
+ * on purpose. Add them here once those policies are decided.
+ */
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import Icon from '../components/Icon.astro';
+import ServiceArea from '../components/ServiceArea.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { eventTypes } from '../data/events';
+import { site, siteUrl } from '../data/site';
+
+const moments = [
+  'Laughter between friends',
+  'A proud smile during a retirement speech',
+  'The reaction to a surprise party',
+  'A grandparent holding a baby',
+  'Meaningful, in-between interactions',
+  'Decorations and personal touches',
+  'Guests simply enjoying themselves',
+];
+
+const expect = [
+  { icon: 'chat', title: 'We’ll talk beforehand', text: 'We’ll chat about your event, the schedule, the people and the feel of the day.' },
+  { icon: 'heart', title: 'You share your priorities', text: 'Tell me your must-have moments, special guests and any specific photo requests.' },
+  { icon: 'eye', title: 'I photograph naturally', text: 'I capture the day as it unfolds, mostly candid, with any group photos you’d like.' },
+  { icon: 'leaf', title: 'I won’t disrupt the celebration', text: 'My aim is to blend in, so your guests can relax and enjoy themselves.' },
+  { icon: 'calendar', title: 'We agree on coverage', text: 'Together we’ll decide how much of the event you’d like covered, so it’s clear up front.' },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Candid event photography',
+    serviceType: 'Event photography',
+    description:
+      'Natural, candid photography for baby showers, birthdays, retirement parties, family gatherings, workplace holiday parties and community events. Quoted individually.',
+    provider: { '@id': siteUrl ? `${siteUrl}/#business` : '#business' },
+    areaServed: [...site.towns.map((t) => `${t}, Ontario`), 'Ottawa Valley'],
+  },
+];
+---
+
+<Base
+  title="Candid Event Photography | Renfrew & Ottawa Valley"
+  description="Natural, candid event photography for baby showers, birthdays, retirement parties, family gatherings and workplace events in Renfrew and across the Ottawa Valley."
+  schema={schema}
+>
+  <!-- ─── Hero ─── -->
+  <section class="page-hero photo-hero" aria-labelledby="page-title">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Event photography</p>
+        <h1 id="page-title">You enjoy the moment. <span class="accent">I’ll make sure you remember it.</span></h1>
+        <div class="photo-hero__story">
+          <p>
+            You’ve spent weeks planning. Choosing decorations, ordering flowers, sorting out the food, sending the
+            invitations and fussing over a hundred little details nobody else will notice, but you will.
+          </p>
+          <p>
+            Then the day finally arrives, and you’re busy greeting guests, answering questions, refilling the punch and making
+            sure everyone’s happy. By the end of it, you’ve barely taken a single photo.
+          </p>
+          <p class="photo-hero__turn">That’s where I come in.</p>
+        </div>
+        <div class="btn-row">
+          <a class="btn" href="/contact/?service=event-photography">Let’s Capture Your Event <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="photo-hero__art">
+        <Photo name="celebration-table-lilacs" ratio="4/5" eager class="photo-hero__main" sizes="(min-width: 900px) 40vw, 90vw" />
+        <Photo name="floral-centrepiece" ratio="3/4" class="photo-hero__small" sizes="(min-width: 900px) 15vw, 36vw" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Style ─── -->
+  <section class="section section--paper" aria-labelledby="style-title">
+    <div class="container split split--reverse">
+      <div>
+        <p class="eyebrow">My photography style</p>
+        <h2 id="style-title">The best moments aren’t always <span class="accent">the posed ones.</span></h2>
+        <p class="lede">
+          I prefer to blend naturally into the background and let the day unfold. The moments I love most are the ones
+          nobody planned:
+        </p>
+        <ul class="moments" role="list">{moments.map((m) => <li>{m}</li>)}</ul>
+        <p class="muted">
+          I’m always happy to take any group photos you’d like (Grandma will want one with all the cousins). But candid
+          photography is my main style, and it’s what I love doing most.
+        </p>
+      </div>
+      <Photo name="baby-shower-friends" ratio="5/4" sizes="(min-width: 900px) 46vw, 92vw" />
+    </div>
+  </section>
+
+  <!-- ─── Why hire ─── -->
+  <section class="section why-hire" aria-labelledby="why-title">
+    <div class="container split">
+      <Photo name="grandmother-holding-baby" ratio="5/4" sizes="(min-width: 900px) 46vw, 92vw" />
+      <div>
+        <p class="eyebrow">Why hire an event photographer?</p>
+        <h2 id="why-title">You deserve to be <span class="accent">in the photos, too.</span></h2>
+        <p class="lede">
+          The host always ends up behind the camera, or never has time to pick it up at all.
+        </p>
+        <p class="muted">
+          Years from now, you’ll want photos of the people who came, the speeches, the hugs, and yes, you. I want you to
+          actually enjoy your event instead of spending it worrying about capturing everything. Be a guest at your own party.
+          I’ve got the camera.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Event types ─── -->
+  <section class="section section--sage" aria-labelledby="types-title">
+    <div class="container">
+      <div class="section-head center">
+        <p class="eyebrow">Events I photograph</p>
+        <h2 id="types-title">Celebrations big, small <span class="accent">and in between</span></h2>
+        <p>If you’re gathering people together for something that matters to you, I’d love to be there.</p>
+      </div>
+      <ul class="types" role="list">
+        {
+          eventTypes.map((e) => (
+            <li class="type">
+              <span class="type__icon">
+                <Icon name={e.icon} />
+              </span>
+              <h3 class="type__title">{e.title}</h3>
+              <p>{e.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- ─── Details ─── -->
+  <section class="section" aria-labelledby="details-title">
+    <div class="container split split--reverse">
+      <div>
+        <p class="eyebrow">The little details</p>
+        <h2 id="details-title">All those little things you worked so hard on? <span class="accent">I notice them.</span></h2>
+        <p class="lede">
+          The handmade centrepieces. Grandma’s recipe on the dessert table. The flowers you picked out, the memory table, the
+          guest book, the banner your kids made.
+        </p>
+        <p class="muted">
+          Those details are part of the story of your event, and they deserve to be remembered as much as the people. I make
+          a point of photographing them early, before the candles burn down and the cake gets cut.
+        </p>
+      </div>
+      <Photo name="candlelit-table-roses" ratio="5/4" sizes="(min-width: 900px) 46vw, 92vw" />
+    </div>
+  </section>
+
+  <!-- ─── What to expect ─── -->
+  <section class="section section--paper" aria-labelledby="expect-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">What to expect</p>
+        <h2 id="expect-title">Easy, relaxed and <span class="accent">all about you</span></h2>
+      </div>
+      <ol class="expect" role="list">
+        {
+          expect.map((x) => (
+            <li class="expect__item">
+              <span class="expect__icon">
+                <Icon name={x.icon} />
+              </span>
+              <div>
+                <h3>{x.title}</h3>
+                <p>{x.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- ─── Pricing ─── -->
+  <section class="section" aria-labelledby="pricing-title">
+    <div class="container">
+      <div class="quote-card">
+        <div>
+          <p class="eyebrow">Pricing</p>
+          <h2 id="pricing-title">Every celebration is a little different.</h2>
+          <p class="lede">
+            So event photography is quoted individually, based on how long your event is, where it’s happening and how much
+            coverage you’d like.
+          </p>
+          <p class="muted">Tell me about your plans and I’ll send you a clear, no-pressure quote.</p>
+        </div>
+        <a class="btn btn--accent" href="/contact/?service=event-photography">Request a Photography Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Service area ─── -->
+  <section class="section--tight" aria-label="Service area">
+    <div class="container">
+      <ServiceArea heading="Photographing celebrations across the Ottawa Valley.">
+        <p>
+          I photograph events in Renfrew, Calabogie, Arnprior, Pembroke, Petawawa, Barry’s Bay and the surrounding
+          communities. Planning something farther away? Get in touch anyway. Any additional travel costs will be clearly
+          included in your quote.
+        </p>
+      </ServiceArea>
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Be part of the moment. <span class='accent'>Not stuck behind the camera.</span>"
+    button="Tell Me What You’re Celebrating"
+    href="/contact/?service=event-photography"
+  >
+    <p>Share a few details about your event, and let’s make sure it’s remembered.</p>
+  </CtaBand>
+</Base>
+
+<style>
+  .photo-hero {
+    background: radial-gradient(900px 520px at 100% 10%, var(--blush-soft), transparent 62%), var(--ivory);
+  }
+  .photo-hero h1 {
+    font-size: var(--step-4);
+    max-width: 17ch;
+  }
+  .photo-hero__story {
+    max-width: 56ch;
+    color: var(--muted);
+  }
+  .photo-hero__turn {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: var(--step-2);
+    color: var(--terra-deep);
+    margin-top: 0.5rem;
+  }
+  .photo-hero__art {
+    position: relative;
+    padding-left: 16%;
+    padding-bottom: 8%;
+    max-width: 560px;
+    width: 100%;
+    margin-inline: auto;
+  }
+  .photo-hero__art :global(.photo-hero__small) {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 38%;
+    border: 6px solid var(--ivory);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+  }
+
+  .moments {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    display: grid;
+    gap: 0;
+  }
+  .moments li {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: var(--step-1);
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--taupe);
+    display: flex;
+    gap: 0.8rem;
+    align-items: baseline;
+  }
+  .moments li::before {
+    content: '';
+    flex: none;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--terracotta);
+    transform: translateY(-0.15em);
+  }
+
+  .types {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  @media (min-width: 600px) {
+    .types {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1000px) {
+    .types {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .type {
+    background: var(--ivory);
+    border-radius: var(--radius);
+    padding: 1.6rem;
+    border: 1px solid rgb(79 94 76 / 0.15);
+  }
+  .type__icon {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--blush-soft);
+    color: var(--terra-deep);
+    margin-bottom: 1rem;
+  }
+  .type__title {
+    font-size: var(--step-1);
+    margin-bottom: 0.4rem;
+  }
+  .type p {
+    color: var(--muted);
+    font-size: 0.97rem;
+    line-height: 1.6;
+  }
+
+  .expect {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  @media (min-width: 760px) {
+    .expect {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1100px) {
+    .expect {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+  .expect__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    background: var(--ivory);
+    border: 1px solid var(--taupe);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+  }
+  .expect__item h3 {
+    font-size: var(--step-1);
+    margin-bottom: 0.35rem;
+  }
+  .expect__item p {
+    color: var(--muted);
+    font-size: 0.97rem;
+    line-height: 1.6;
+  }
+  .expect__icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--sage-tint);
+    color: var(--sage-deep);
+  }
+
+  .quote-card {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+    border: 1px solid var(--taupe);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.75rem, 1.2rem + 3vw, 3.5rem);
+    background:
+      radial-gradient(500px 300px at 100% 100%, var(--blush-soft), transparent 70%),
+      var(--white);
+  }
+  @media (min-width: 860px) {
+    .quote-card {
+      grid-template-columns: 1fr auto;
+      gap: 4rem;
+    }
+  }
+  .quote-card h2 {
+    font-size: var(--step-3);
+  }
+</style>

@@ -1,0 +1,65 @@
+---
+import { site } from '../data/site';
+import Icon from './Icon.astro';
+
+interface Props {
+  heading?: string;
+  headingLevel?: 'h2' | 'h3';
+  tone?: 'paper' | 'sage' | 'plain';
+}
+const { heading = 'Proudly serving the Ottawa Valley and beyond.', headingLevel = 'h2', tone = 'sage' } = Astro.props;
+const H = headingLevel;
+---
+
+<div class={`area area--${tone}`}>
+  <div class="area__icon" aria-hidden="true"><Icon name="map" size={28} /></div>
+  <div class="area__body">
+    <H class="area__heading">{heading}</H>
+    <slot />
+    <ul class="towns" aria-label="Communities served">
+      {site.towns.map((t) => <li>{t}</li>)}
+      <li class="towns__more">+ surrounding communities</li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .area {
+    display: grid;
+    gap: 1.5rem;
+    border-radius: var(--radius-lg);
+    padding: clamp(1.75rem, 1.2rem + 3vw, 3.75rem);
+  }
+  .area--sage {
+    background: var(--sage-tint);
+  }
+  .area--paper {
+    background: var(--paper);
+  }
+  .area--plain {
+    border: 1px solid var(--taupe);
+  }
+  @media (min-width: 760px) {
+    .area {
+      grid-template-columns: auto 1fr;
+      gap: 2.5rem;
+    }
+  }
+  .area__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--ivory);
+    color: var(--sage-deep);
+  }
+  .area__heading {
+    font-size: var(--step-3);
+    margin-bottom: 0.75rem;
+    max-width: 22ch;
+  }
+  .area__body :global(p) {
+    max-width: var(--measure);
+  }
+</style>

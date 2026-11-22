@@ -1,0 +1,257 @@
+---
+/**
+ * FAQ PAGE — questions and answers live in src/data/faqs.ts
+ * Accordion follows the WAI-ARIA pattern: heading > button[aria-expanded].
+ * Without JavaScript every answer is simply shown.
+ */
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { websiteFaqs, photographyFaqs, type Faq } from '../data/faqs';
+
+const groups: { id: string; title: string; icon: string; items: Faq[] }[] = [
+  { id: 'websites', title: 'Website design', icon: 'laptop', items: websiteFaqs },
+  { id: 'photography', title: 'Event photography', icon: 'camera', items: photographyFaqs },
+];
+
+const strip = (html: string) => html.replace(/<[^>]+>/g, '');
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [...websiteFaqs, ...photographyFaqs].map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: strip(f.a) },
+    })),
+  },
+];
+---
+
+<Base
+  title="Website Design & Photography FAQs | Small Town Chatter"
+  description="Answers about small business website costs, tax-inclusive pricing, ongoing fees, copywriting, and candid event photography in the Ottawa Valley."
+  schema={schema}
+>
+  <section class="page-hero faq-hero" aria-labelledby="page-title">
+    <div class="container--narrow center">
+      <p class="eyebrow">FAQs</p>
+      <h1 id="page-title">Good questions. <span class="accent">Honest answers.</span></h1>
+      <p class="lede center">
+        Here are the things people ask me most about websites and event photography. Don’t see your question? Just ask.
+      </p>
+      <nav class="faq-jump" aria-label="FAQ sections">
+        {
+          groups.map((g) => (
+            <a href={`#${g.id}`} class="faq-jump__link">
+              <Icon name={g.icon} size={18} /> {g.title}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+  </section>
+
+  {
+    groups.map((g, gi) => (
+      <section id={g.id} class:list={['section', 'faq-group', { 'section--paper': gi === 1 }]} aria-labelledby={`${g.id}-title`}>
+        <div class="container--narrow">
+          <div class="faq-group__head">
+            <span class="faq-group__icon">
+              <Icon name={g.icon} size={24} />
+            </span>
+            <h2 id={`${g.id}-title`}>{g.title}</h2>
+          </div>
+          <div class="accordion" data-accordion>
+            {g.items.map((f, i) => {
+              const id = `${g.id}-${i + 1}`;
+              return (
+                <div class="acc">
+                  <h3 class="acc__h">
+                    <button
+                      type="button"
+                      class="acc__btn"
+                      id={`${id}-btn`}
+                      aria-expanded="true"
+                      aria-controls={`${id}-panel`}
+                    >
+                      <span>{f.q}</span>
+                      <span class="acc__icon" aria-hidden="true" />
+                    </button>
+                  </h3>
+                  <div class="acc__panel" id={`${id}-panel`} role="region" aria-labelledby={`${id}-btn`}>
+                    <p set:html={f.a} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    ))
+  }
+
+  <CtaBand heading="Still have questions? <span class='accent'>Don’t be shy.</span> Let’s chat." button="Ask Me Anything" href="/contact/">
+    <p>There’s no such thing as a silly question. I’m happy to explain anything, in plain English.</p>
+  </CtaBand>
+</Base>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-accordion]').forEach((acc) => {
+    const buttons = [...acc.querySelectorAll<HTMLButtonElement>('.acc__btn')];
+    const panelFor = (b: HTMLButtonElement) => document.getElementById(b.getAttribute('aria-controls')!)!;
+    const set = (b: HTMLButtonElement, open: boolean) => {
+      b.setAttribute('aria-expanded', String(open));
+      panelFor(b).hidden = !open;
+    };
+    // Start collapsed once JavaScript is available; open one linked by #hash
+    buttons.forEach((b) => set(b, false));
+    const hash = location.hash.slice(1);
+    const linked = buttons.find((b) => b.id === `${hash}-btn`);
+    if (linked) set(linked, true);
+
+    buttons.forEach((b, i) => {
+      b.addEventListener('click', () => set(b, b.getAttribute('aria-expanded') !== 'true'));
+      b.addEventListener('keydown', (e) => {
+        const go = (n: number) => {
+          e.preventDefault();
+          buttons[(n + buttons.length) % buttons.length].focus();
+        };
+        if (e.key === 'ArrowDown') go(i + 1);
+        else if (e.key === 'ArrowUp') go(i - 1);
+        else if (e.key === 'Home') go(0);
+        else if (e.key === 'End') go(buttons.length - 1);
+      });
+    });
+  });
+</script>
+
+<style>
+  .faq-hero h1 {
+    margin-inline: auto;
+    max-width: 14ch;
+  }
+  .faq-jump {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 2rem;
+  }
+  .faq-jump__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--taupe);
+    background: var(--white);
+    color: var(--charcoal);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .faq-jump__link:hover {
+    border-color: var(--charcoal);
+    color: var(--charcoal);
+  }
+  .faq-group__head {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+  }
+  .faq-group__head h2 {
+    margin: 0;
+    font-size: var(--step-3);
+  }
+  .faq-group__icon {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--blush-soft);
+    color: var(--terra-deep);
+  }
+  .accordion {
+    border-top: 1px solid var(--taupe);
+  }
+  .acc {
+    border-bottom: 1px solid var(--taupe);
+  }
+  .acc__h {
+    margin: 0;
+    font-size: inherit;
+  }
+  .acc__btn {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.3rem 0.25rem;
+    background: none;
+    border: 0;
+    color: var(--charcoal);
+    text-align: left;
+    font-family: var(--font-serif);
+    font-size: var(--step-1);
+    line-height: 1.35;
+    cursor: pointer;
+    min-height: 56px;
+  }
+  .acc__btn:hover {
+    color: var(--terra-deep);
+  }
+  .acc__icon {
+    flex: none;
+    position: relative;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1.5px solid var(--taupe);
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .acc__icon::before,
+  .acc__icon::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 12px;
+    height: 1.5px;
+    background: currentColor;
+    transform: translate(-50%, -50%);
+    transition: transform 0.25s ease;
+  }
+  .acc__icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+  .acc__btn[aria-expanded='true'] .acc__icon {
+    background: var(--charcoal);
+    border-color: var(--charcoal);
+    color: var(--ivory);
+  }
+  .acc__btn[aria-expanded='true'] .acc__icon::after {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  .acc__panel {
+    padding: 0 3.5rem 1.6rem 0.25rem;
+    color: var(--muted);
+    max-width: 68ch;
+  }
+  @media (max-width: 560px) {
+    .acc__panel {
+      padding-right: 0.25rem;
+    }
+  }
+  .acc__panel :global(a) {
+    font-weight: 600;
+  }
+  .acc__panel :global(strong) {
+    color: var(--charcoal);
+  }
+</style>

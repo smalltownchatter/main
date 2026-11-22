@@ -1,0 +1,62 @@
+---
+/** Text-only wordmark: "SMALL TOWN" set small and spaced, "Chatter" in serif italic. */
+interface Props {
+  size?: 'md' | 'lg';
+  tone?: 'dark' | 'light';
+}
+const { size = 'md', tone = 'dark' } = Astro.props;
+---
+
+<span class={`wordmark wordmark--${size} wordmark--${tone}`}>
+  <span class="wordmark__small">Small Town</span>
+  <span class="wordmark__big">Chatter</span>
+</span>
+
+<style>
+  .wordmark {
+    display: inline-flex;
+    flex-direction: column;
+    line-height: 1;
+    gap: 0.18em;
+    color: var(--charcoal);
+  }
+  .wordmark__small {
+    font-family: var(--font-sans);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--terra-deep);
+    padding-left: 0.12em;
+  }
+  .wordmark__big {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.85rem;
+    font-weight: 420;
+    letter-spacing: -0.02em;
+    line-height: 0.9;
+  }
+  .wordmark__big::after {
+    content: '';
+    display: inline-block;
+    width: 0.16em;
+    height: 0.16em;
+    margin-left: 0.06em;
+    border-radius: 50%;
+    background: var(--terracotta);
+    vertical-align: baseline;
+  }
+  .wordmark--lg .wordmark__small {
+    font-size: 0.8rem;
+  }
+  .wordmark--lg .wordmark__big {
+    font-size: 2.6rem;
+  }
+  .wordmark--light {
+    color: var(--ivory);
+  }
+  .wordmark--light .wordmark__small {
+    color: var(--blush);
+  }
+</style>

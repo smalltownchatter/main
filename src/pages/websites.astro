@@ -1,0 +1,583 @@
+---
+/**
+ * WEBSITE DESIGN PAGE
+ * Package names, prices and features come from src/data/packages.ts.
+ */
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import Icon from '../components/Icon.astro';
+import PricingCard from '../components/PricingCard.astro';
+import ServiceArea from '../components/ServiceArea.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { packages, money } from '../data/packages';
+import { site, siteUrl } from '../data/site';
+
+const why = [
+  { icon: 'search', title: 'Get found', text: 'Show up when people search for what you do, and for your business by name.' },
+  { icon: 'shield', title: 'Build credibility', text: 'A polished website tells people you’re established, professional and open for business.' },
+  { icon: 'mail', title: 'Make contact easy', text: 'Your phone number, email, hours and a contact form, right where people expect them.' },
+  { icon: 'chat', title: 'Answer questions', text: 'Cover the things customers always ask before they ever pick up the phone.' },
+  { icon: 'clock', title: 'Save time', text: 'Fewer repeat questions and back-and-forth messages means more time for your actual work.' },
+  { icon: 'home', title: 'A home of your own', text: 'A consistent online presence that doesn’t depend on Facebook or Instagram’s latest changes.' },
+];
+
+const steps = [
+  { title: 'We have a chat.', text: 'You tell me about your business, your customers and what you need. No pressure, no jargon.' },
+  { title: 'I put a plan together.', text: 'I recommend the right package, list exactly what’s included and explain any ongoing costs.' },
+  { title: 'I design and write your website.', text: 'I write the copy, choose the photography and design everything to suit your business.' },
+  { title: 'You review it.', text: 'You take a look and tell me what you’d like changed, within your package’s revision rounds.' },
+  { title: 'We launch.', text: 'I handle the launch setup and make sure everything is working the way it should.' },
+];
+
+const custom = ['Online scheduling', 'Appointment booking', 'Interactive elements', 'Event calendars', 'Custom forms', 'Other more advanced features'];
+const bizPhoto = ['Storefronts', 'Products', 'Team members', 'Workspaces', 'Business details', 'Services in action'];
+
+const offers = packages.map((p) => ({
+  '@type': 'Offer',
+  name: p.name,
+  description: `${p.pages}. ${p.summary}`,
+  price: p.price,
+  priceCurrency: 'CAD',
+  priceSpecification: {
+    '@type': 'PriceSpecification',
+    price: p.price,
+    priceCurrency: 'CAD',
+    valueAddedTaxIncluded: true,
+  },
+  ...(siteUrl ? { url: `${siteUrl}/contact/?service=${p.id}` } : {}),
+}));
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Small business website design',
+    serviceType: 'Website design',
+    provider: { '@id': siteUrl ? `${siteUrl}/#business` : '#business' },
+    areaServed: [...site.towns.map((t) => `${t}, Ontario`), 'Ottawa Valley', 'Ontario', 'Canada'],
+    hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Website packages', itemListElement: offers },
+  },
+];
+---
+
+<Base
+  title="Affordable Small Business Website Design | Ottawa Valley"
+  description="Affordable small business website design in Renfrew, Arnprior, Pembroke, Petawawa, Calabogie & Barry's Bay. Copywriting and photos included, from $1,000 all-in."
+  schema={schema}
+>
+  <!-- ─── Hero ─── -->
+  <section class="page-hero web-hero" aria-labelledby="page-title">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Website design for small businesses</p>
+        <h1 id="page-title">A website that works hard, <span class="accent">so you don’t have to.</span></h1>
+        <p class="lede">
+          You didn’t start your business because you wanted to spend your evenings updating a website. You started it
+          because you’re good at what you do.
+        </p>
+        <p class="muted measure">
+          I get it. You don’t need complicated technology. You need customers to find you, understand what you offer and
+          get in touch. That’s exactly what I build.
+        </p>
+        <div class="btn-row">
+          <a class="btn" href="/contact/">Let’s Get Your Business Online <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="btn btn--ghost" href="#pricing">See Packages</a>
+        </div>
+      </div>
+      <div class="web-hero__art">
+        <Photo name="storefront-open-sign" ratio="4/5" eager sizes="(min-width: 900px) 42vw, 92vw" />
+        <p class="web-hero__badge">
+          <span class="web-hero__badge-num">{money(packages[0].price)}</span>
+          <span>one-page websites, all-in</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Why a website matters ─── -->
+  <section class="section section--paper" aria-labelledby="why-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Why a website matters</p>
+        <h2 id="why-title">Your customers are looking online. <span class="accent">Can they find you?</span></h2>
+        <p>
+          Word of mouth is still the best advertising there is. But when a neighbour recommends you, the next thing most
+          people do is look you up. If they can’t find you, or can’t find what they need, they may move on to someone they
+          can.
+        </p>
+      </div>
+      <ul class="why-grid" role="list">
+        {
+          why.map((w) => (
+            <li class="why-item">
+              <span class="why-item__icon">
+                <Icon name={w.icon} />
+              </span>
+              <div>
+                <h3>{w.title}</h3>
+                <p>{w.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="fine why-note">
+        A good website gives people a clear, trustworthy place to learn about you. No one can honestly guarantee search
+        rankings or a set number of new customers, and I won’t pretend to.
+      </p>
+    </div>
+  </section>
+
+  <!-- ─── Approach ─── -->
+  <section class="section" aria-labelledby="approach-title">
+    <div class="container split split--reverse">
+      <div>
+        <p class="eyebrow">My approach</p>
+        <h2 id="approach-title">Simple doesn’t mean <span class="accent">second best.</span></h2>
+        <p class="lede">I won’t sell you features you don’t need.</p>
+        <p class="muted">
+          Some businesses only need a single, beautiful page. Others need a few pages to explain their services properly.
+          I keep the process straightforward and build your website around what your business actually needs.
+        </p>
+        <div class="callout">
+          <h3>You don’t need to write it all yourself.</h3>
+          <p>
+            I’ll learn about your business, write the copy and source appropriate licensed stock photography. You just tell
+            me what you do and who you do it for. I’ll take it from there.
+          </p>
+        </div>
+      </div>
+      <Photo name="laptop-photo-editing" ratio="5/4" sizes="(min-width: 900px) 44vw, 92vw" />
+    </div>
+  </section>
+
+  <!-- ─── Pricing ─── -->
+  <section id="pricing" class="section section--blush pricing" aria-labelledby="pricing-title">
+    <div class="container">
+      <div class="section-head center">
+        <p class="eyebrow">Website packages</p>
+        <h2 id="pricing-title">Honest prices, <span class="accent">all-in.</span></h2>
+        <p>Two simple packages. All prices are in Canadian dollars and include applicable tax.</p>
+      </div>
+
+      <div class="pricing__grid">
+        {packages.map((p, i) => <PricingCard pkg={p} featured={i === 1} />)}
+      </div>
+
+      <div class="transparency" aria-labelledby="transparency-title">
+        <h3 id="transparency-title"><Icon name="tag" size={22} /> What “all-in” means</h3>
+        <div class="transparency__cols">
+          <div>
+            <h4>Included in the package price</h4>
+            <ul class="checklist">
+              <li>
+                The published package prices are the <strong>total one-time website-build price</strong>, including
+                applicable tax. No additional tax is added on top.
+              </li>
+              <li>Design, the agreed copywriting, the included stock photography and launch setup are all covered.</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Possible separate, ongoing costs</h4>
+            <ul class="plain-list">
+              <li>Domain name registration and renewals (your web address)</li>
+              <li>Website hosting and renewals</li>
+              <li>Optional future updates or maintenance</li>
+              <li>Third-party subscriptions, like a booking tool, if you choose one</li>
+            </ul>
+            <p class="fine">
+              Domains and hosting aren’t free for life, and the costs vary by provider. I’ll explain exactly what applies to
+              your website, and what it costs, <strong>before you commit</strong>. If you’d like something outside your
+              agreed package, we’ll discuss it and I’ll quote the extra work before doing it.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Custom functionality ─── -->
+  <section class="section" aria-labelledby="custom-title">
+    <div class="container">
+      <div class="duo">
+        <article class="duo__card" aria-labelledby="custom-title">
+          <span class="duo__icon"><Icon name="sliders" /></span>
+          <h2 id="custom-title" class="duo__title">Something more complicated? <span class="accent">Let’s chat.</span></h2>
+          <p>
+            Need more than the packages cover? I’m happy to talk through additional features, including:
+          </p>
+          <ul class="chips" role="list">{custom.map((c) => <li>{c}</li>)}</ul>
+          <p class="fine">These are quoted separately, depending on what’s involved.</p>
+          <a class="btn btn--ghost" href="/contact/?service=custom-website">Ask About a Custom Website</a>
+        </article>
+
+        <article id="business-photography" class="duo__card duo__card--photo" aria-labelledby="bizphoto-title">
+          <Photo name="cafe-owner-apron" ratio="16/9" sizes="(min-width: 900px) 44vw, 92vw" class="duo__photo" />
+          <div class="duo__inner">
+            <h2 id="bizphoto-title" class="duo__title">Want to show off the real people and places behind your business?</h2>
+            <p>
+              Licensed stock photography is included in every website package. But sometimes original photos are even
+              better. I can photograph your:
+            </p>
+            <ul class="chips" role="list">{bizPhoto.map((c) => <li>{c}</li>)}</ul>
+            <p class="fine">Business photography is a separately quoted service.</p>
+            <a class="btn btn--ghost" href="/contact/?service=business-photography">Ask About Business Photography</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Low maintenance ─── -->
+  <section class="section section--paper" aria-labelledby="lowmaint-title">
+    <div class="container split">
+      <Photo name="carpenter-workshop" ratio="5/4" sizes="(min-width: 900px) 46vw, 92vw" />
+      <div>
+        <p class="eyebrow">Low-maintenance by design</p>
+        <h2 id="lowmaint-title">Your website shouldn’t become <span class="accent">another full-time job.</span></h2>
+        <p class="lede">Most small businesses don’t need to post new content every week, and I won’t build you a website that expects you to.</p>
+        <p class="muted">
+          I build websites to stay useful for the long haul: clear information that doesn’t go stale quickly, with room for
+          the occasional change when your hours, prices or services do. Like anything online, a website can need a bit of
+          technical upkeep from time to time, and I’ll always be upfront about what that might look like.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Process ─── -->
+  <section class="section" aria-labelledby="process-title">
+    <div class="container">
+      <div class="section-head center">
+        <p class="eyebrow">How it works</p>
+        <h2 id="process-title">Five friendly steps</h2>
+      </div>
+      <ol class="steps">
+        {
+          steps.map((s, i) => (
+            <li class="step">
+              <span class="step__num" aria-hidden="true">{i + 1}</span>
+              <h3 class="step__title">{s.title}</h3>
+              <p>{s.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- ─── Service area ─── -->
+  <section class="section--tight" aria-label="Service area">
+    <div class="container">
+      <ServiceArea heading="Local when you want it. Remote when you need it.">
+        <p>
+          I work with businesses throughout Renfrew, Calabogie, Arnprior, Pembroke, Petawawa, Barry’s Bay and the
+          surrounding communities, and with remote clients outside the Ottawa Valley, too. Website projects can be handled
+          entirely by email, phone or video chat.
+        </p>
+      </ServiceArea>
+    </div>
+  </section>
+
+  <CtaBand heading="Your business deserves <span class='accent'>to be found.</span>" button="Get My Website Started" href="/contact/">
+    <p>Tell me a little about your business and I’ll recommend the right fit, with a clear price and no pressure.</p>
+  </CtaBand>
+</Base>
+
+<style>
+  .web-hero {
+    background: radial-gradient(900px 500px at 0% 0%, var(--sage-tint), transparent 60%), var(--ivory);
+  }
+  .web-hero h1 {
+    font-size: var(--step-5);
+    max-width: 14ch;
+  }
+  .web-hero__art {
+    position: relative;
+    max-width: 520px;
+    width: 100%;
+    margin-inline: auto;
+  }
+  .web-hero__badge {
+    position: absolute;
+    left: -0.75rem;
+    bottom: 2rem;
+    margin: 0;
+    display: grid;
+    gap: 0.15rem;
+    background: var(--ivory);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+    color: var(--muted);
+    max-width: 15rem;
+  }
+  @media (min-width: 640px) {
+    .web-hero__badge {
+      left: -2rem;
+    }
+  }
+  .web-hero__badge-num {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    color: var(--charcoal);
+    line-height: 1;
+  }
+
+  /* Why grid */
+  .why-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  @media (min-width: 640px) {
+    .why-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (min-width: 1000px) {
+    .why-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .why-item {
+    display: flex;
+    gap: 1rem;
+    background: var(--ivory);
+    border: 1px solid var(--taupe);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+  }
+  .why-item h3 {
+    font-size: var(--step-1);
+    margin-bottom: 0.3rem;
+  }
+  .why-item p {
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+  .why-item__icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--sage-tint);
+    color: var(--sage-deep);
+  }
+  .why-note {
+    margin-top: 1.75rem;
+    max-width: 60ch;
+  }
+
+  .callout {
+    margin-top: 2rem;
+    border-left: 3px solid var(--terracotta);
+    background: var(--blush-soft);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1.4rem 1.6rem;
+  }
+  .callout h3 {
+    font-size: var(--step-1);
+    margin-bottom: 0.4rem;
+  }
+
+  /* Pricing */
+  .pricing__grid {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 1020px;
+    margin-inline: auto;
+  }
+  @media (min-width: 860px) {
+    .pricing__grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+    }
+  }
+  .transparency {
+    max-width: 1020px;
+    margin: clamp(2rem, 1.5rem + 2vw, 3rem) auto 0;
+    background: var(--ivory);
+    border: 1px solid var(--taupe);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.5rem, 1.2rem + 2vw, 2.75rem);
+  }
+  .transparency > h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: var(--step-2);
+    margin-bottom: 1.5rem;
+    color: var(--charcoal);
+  }
+  .transparency > h3 :global(svg) {
+    color: var(--terra-deep);
+  }
+  .transparency__cols {
+    display: grid;
+    gap: 2rem;
+  }
+  @media (min-width: 760px) {
+    .transparency__cols {
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+  }
+  .transparency h4 {
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+    font-weight: 650;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terra-deep);
+    margin-bottom: 1rem;
+  }
+  .plain-list {
+    margin: 0 0 1rem;
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 0.35rem;
+  }
+  .plain-list li::marker {
+    color: var(--terracotta);
+  }
+
+  /* Custom + business photo */
+  .duo {
+    display: grid;
+    gap: 1.5rem;
+  }
+  @media (min-width: 900px) {
+    .duo {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .duo__card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 1px solid var(--taupe);
+    border-radius: var(--radius-lg);
+    background: var(--white);
+    padding: clamp(1.75rem, 1.3rem + 2vw, 2.75rem);
+  }
+  .duo__card--photo {
+    padding: 0;
+    overflow: hidden;
+  }
+  .duo__card--photo :global(.duo__photo) {
+    border-radius: 0;
+    width: 100%;
+  }
+  .duo__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    padding: clamp(1.75rem, 1.3rem + 2vw, 2.75rem);
+  }
+  .duo__card .btn {
+    margin-top: auto;
+  }
+  .duo__icon {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--sage-tint);
+    color: var(--sage-deep);
+    margin-bottom: 1.25rem;
+  }
+  .duo__title {
+    font-size: var(--step-3);
+  }
+  .duo__card p {
+    color: var(--muted);
+  }
+  .chips {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .chips li {
+    background: var(--paper);
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.93rem;
+    font-weight: 500;
+  }
+  .duo__card .fine {
+    margin-bottom: 1.5rem;
+  }
+
+  /* Steps */
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+    counter-reset: none;
+  }
+  @media (min-width: 700px) {
+    .steps {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1100px) {
+    .steps {
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+    }
+  }
+  .step {
+    position: relative;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    background: var(--paper);
+  }
+  @media (min-width: 1100px) {
+    .step {
+      background: transparent;
+      border-radius: 0;
+      padding: 0 1.25rem;
+      border-left: 1px solid var(--taupe);
+    }
+    .step:first-child {
+      border-left: 0;
+      padding-left: 0;
+    }
+  }
+  .step__num {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1.5px solid var(--terracotta);
+    color: var(--terra-deep);
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-bottom: 1rem;
+    background: var(--ivory);
+  }
+  .step__title {
+    font-size: var(--step-1);
+    margin-bottom: 0.4rem;
+  }
+  .step p {
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+</style>

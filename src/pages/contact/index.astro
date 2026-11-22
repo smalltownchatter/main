@@ -1,0 +1,203 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import { site } from '../../data/site';
+---
+
+<Base
+  title="Contact Small Town Chatter | Ottawa Valley"
+  description="Get in touch with Chelsey about a small business website or event photography in Renfrew, Arnprior, Pembroke, Petawawa, Calabogie, Barry's Bay and beyond."
+>
+  <section class="page-hero contact-hero" aria-labelledby="page-title">
+    <div class="container contact-hero__grid">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h1 id="page-title">Let’s get <span class="accent">chatting!</span></h1>
+        <div class="contact-hero__copy">
+          <p class="lede">
+            Have a small business that needs a website?<br />
+            Planning a celebration you want to remember?<br />
+            Or just have a question about how it all works?
+          </p>
+          <p class="lede">I’d love to hear from you.</p>
+          <p class="muted">No pressure. No complicated process. Just a friendly conversation about what you have in mind.</p>
+        </div>
+      </div>
+
+      <aside class="email-card" aria-label="Email">
+        <span class="email-card__icon"><Icon name="mail" size={26} /></span>
+        <p class="email-card__label">Prefer email? Write to me directly:</p>
+        <a class="email-card__link" href={`mailto:${site.email}`}>{site.email}</a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section contact-main" aria-labelledby="form-title">
+    <div class="container contact-main__grid">
+      <div>
+        <h2 id="form-title" class="contact-main__title">Send me a message</h2>
+        <ContactForm />
+      </div>
+
+      <aside class="contact-aside" aria-label="More information">
+        <div class="contact-aside__block">
+          <h2 class="contact-aside__title">What happens next?</h2>
+          <ol class="next">
+            <li>I read your message personally. No bots, no call centres.</li>
+            <li>I reply by email with any questions, or to set up a quick chat.</li>
+            <li>If it’s a good fit, you get a clear plan and price before anything starts.</li>
+          </ol>
+        </div>
+
+        <div class="contact-aside__block contact-aside__block--sage">
+          <h2 class="contact-aside__title"><Icon name="map" size={20} /> Where I work</h2>
+          <p>
+            I proudly serve the Ottawa Valley, including {site.towns.slice(0, -1).join(', ')} and {site.towns.at(-1)}, plus the
+            surrounding communities.
+          </p>
+          <p>
+            Outside the Valley? Please still get in touch. Websites can be built remotely, and I’m happy to talk about
+            events farther afield, with any travel costs clearly included in your quote.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact-hero {
+    background: radial-gradient(900px 520px at 100% 0%, var(--blush-soft), transparent 62%), var(--ivory);
+    padding-bottom: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+  }
+  .contact-hero__grid {
+    display: grid;
+    gap: 2.5rem;
+    align-items: end;
+  }
+  @media (min-width: 900px) {
+    .contact-hero__grid {
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 4rem;
+    }
+  }
+  .contact-hero h1 {
+    font-size: var(--step-5);
+  }
+  .contact-hero__copy .lede {
+    margin-bottom: 1rem;
+  }
+  .email-card {
+    background: var(--charcoal);
+    color: var(--ivory);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+  }
+  .email-card__icon {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgb(250 247 242 / 0.1);
+    color: var(--blush);
+    margin-bottom: 1rem;
+  }
+  .email-card__label {
+    color: #e4dfd7;
+    margin-bottom: 0.4rem;
+  }
+  .email-card__link {
+    font-family: var(--font-serif);
+    font-size: clamp(1.25rem, 1rem + 1.2vw, 1.7rem);
+    color: var(--ivory);
+    overflow-wrap: anywhere;
+    text-decoration-color: var(--terracotta);
+    text-decoration-thickness: 2px;
+  }
+  .email-card__link:hover {
+    color: var(--blush);
+  }
+  .email-card__link:focus-visible {
+    outline-color: var(--blush);
+  }
+
+  .contact-main {
+    padding-top: clamp(1.5rem, 1rem + 2vw, 3rem);
+  }
+  .contact-main__grid {
+    display: grid;
+    gap: 2.5rem;
+  }
+  @media (min-width: 1000px) {
+    .contact-main__grid {
+      grid-template-columns: 1.55fr 0.85fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+  }
+  .contact-main__title {
+    font-size: var(--step-3);
+  }
+  .contact-aside {
+    display: grid;
+    gap: 1.25rem;
+  }
+  @media (min-width: 1000px) {
+    .contact-aside {
+      position: sticky;
+      top: calc(var(--header-h) + 1.5rem);
+      margin-top: 4.25rem;
+    }
+  }
+  .contact-aside__block {
+    border: 1px solid var(--taupe);
+    border-radius: var(--radius);
+    padding: 1.6rem;
+  }
+  .contact-aside__block--sage {
+    background: var(--sage-tint);
+    border-color: transparent;
+  }
+  .contact-aside__block p {
+    font-size: 0.98rem;
+    color: var(--charcoal);
+  }
+  .contact-aside__title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--step-1);
+    margin-bottom: 0.9rem;
+  }
+  .next {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: n;
+    display: grid;
+    gap: 0.9rem;
+  }
+  .next li {
+    counter-increment: n;
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 0.6rem;
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+  .next li::before {
+    content: counter(n);
+    display: grid;
+    place-items: center;
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 50%;
+    background: var(--blush-soft);
+    color: var(--terra-deep);
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+  }
+</style>

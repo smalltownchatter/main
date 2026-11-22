@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page Not Found | Small Town Chatter" description="Sorry, that page couldn’t be found." noindex>
+  <section class="section">
+    <div class="container--narrow center">
+      <p class="eyebrow">404</p>
+      <h1 class="nf-title">Well, this is a <span class="accent">wrong turn.</span></h1>
+      <p class="lede center">
+        Even in a small town, it’s possible to get a little lost. The page you’re looking for isn’t here, but these might
+        help:
+      </p>
+      <div class="btn-row center">
+        <a class="btn" href="/">Go to the homepage</a>
+        <a class="btn btn--ghost" href="/contact/">Contact me</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf-title {
+    font-size: var(--step-4);
+  }
+</style>
