@@ -119,3 +119,33 @@ Other helpers:
 
 - `node scripts/make-icons.mjs` regenerates the PNG favicons from `public/favicon.svg`.
 - `node scripts/make-og.mjs` regenerates `public/og-image.jpg` from `scripts/og.html` (needs Playwright).
+
+## Editing the site in the browser
+
+The site has a simple editor at **/admin/** (Decap CMS). It edits:
+
+- **FAQs** → `src/editable/faqs.json`
+- **Website packages & prices** → `src/editable/packages.json`
+- **Business details** (email, tagline, towns) → `src/editable/business.json`
+
+Each **Publish** in the editor saves a commit to `main` on GitHub, and Netlify rebuilds the live site in a minute or two.
+Layout, design and page wording outside these files stay locked, so they can't be broken from the editor.
+
+### One-time login setup
+
+1. On GitHub: **Settings → Developer settings → OAuth Apps → New OAuth App**
+   - Application name: `Small Town Chatter editor`
+   - Homepage URL: `https://smalltownchatter.ca`
+   - Authorization callback URL: `https://api.netlify.com/auth/done`
+   - Register, then **Generate a new client secret**.
+2. On Netlify: **Project configuration → Access & security → OAuth → Install provider → GitHub**,
+   and paste the Client ID and Client secret.
+3. Visit `https://smalltownchatter.ca/admin/` and click **Login with GitHub**.
+
+Anyone who logs in needs a GitHub account with write access to the repository.
+
+### Reusing this for a client site
+
+Copy `public/admin/`, change `repo`, `site_url` and `display_url` in `config.yml`, and point the
+`file:` entries and fields at that site's editable JSON files. Then repeat the login setup for the client's
+own GitHub OAuth app and Netlify project.
