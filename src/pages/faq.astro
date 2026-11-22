@@ -127,6 +127,15 @@ const schema = [
 </script>
 
 <style>
+  .faq-hero {
+    padding-bottom: clamp(1.5rem, 1rem + 1.5vw, 2.5rem);
+  }
+  .faq-group {
+    padding-block: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+  }
+  .faq-hero + .faq-group {
+    padding-top: clamp(1rem, 0.5rem + 1.5vw, 2rem);
+  }
   .faq-hero h1 {
     margin-inline: auto;
     max-width: 14ch;
