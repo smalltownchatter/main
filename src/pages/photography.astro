@@ -2,8 +2,8 @@
 /**
  * EVENT PHOTOGRAPHY PAGE
  * Event types live in src/data/events.ts.
- * Note: no prices, turnaround times or image counts are published yet,
- * on purpose. Add them here once those policies are decided.
+ * Starting price ($300 / two hours) and the shareable online gallery come
+ * from Chelsey. No turnaround times or image counts are published yet.
  */
 import Base from '../layouts/Base.astro';
 import Photo from '../components/Photo.astro';
@@ -38,7 +38,7 @@ const schema = [
     name: 'Candid event photography',
     serviceType: 'Event photography',
     description:
-      'Natural, candid photography for baby showers, birthdays, retirement parties, family gatherings, workplace holiday parties and community events. Quoted individually.',
+      'Natural, candid photography for baby showers, birthdays, retirement parties, family gatherings, workplace holiday parties and community events. From $300 for two hours.',
     provider: { '@id': siteUrl ? `${siteUrl}/#business` : '#business' },
     areaServed: [...site.towns.map((t) => `${t}, Ontario`), 'Ottawa Valley'],
   },
@@ -193,10 +193,13 @@ const schema = [
           <p class="eyebrow">Pricing</p>
           <h2 id="pricing-title">Every celebration is a little different.</h2>
           <p class="lede">
-            So event photography is quoted individually, based on how long your event is, where it’s happening and how much
-            coverage you’d like.
+            Event photography <strong>starts at $300 for two hours</strong>. The final price depends on things like how many
+            people are attending and how much time you’d like me there.
           </p>
-          <p class="muted">Tell me about your plans and I’ll send you a clear, no-pressure quote.</p>
+          <p class="muted">
+            After your event, you’ll receive an online gallery of your photos with a link you can share with others. Tell me
+            about your plans and I’ll send you a clear, no-pressure quote.
+          </p>
         </div>
         <a class="btn btn--accent" href="/contact/?service=event-photography">Request a Photography Quote</a>
       </div>
@@ -208,9 +211,9 @@ const schema = [
     <div class="container">
       <ServiceArea heading="Photographing celebrations across the Ottawa Valley.">
         <p>
-          I photograph events in Renfrew, Calabogie, Arnprior, Pembroke, Petawawa, Barry’s Bay and the surrounding
-          communities. Planning something farther away? Get in touch anyway. Any additional travel costs will be clearly
-          included in your quote.
+          I photograph events across the Ottawa Valley and surrounding area, including Carp, Almonte, Arnprior, Renfrew,
+          Calabogie, Pembroke, Petawawa, Killaloe, Combermere, Barry’s Bay and Shawville. Planning something farther away?
+          Get in touch anyway.
         </p>
       </ServiceArea>
     </div>

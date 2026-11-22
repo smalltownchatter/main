@@ -226,7 +226,7 @@ const fakeImg = (route) =>
     await page.keyboard.press('ArrowDown');
     ok(await page.evaluate(() => document.activeElement?.id === 'websites-2-btn'), 'ArrowDown moves to next question');
     const count = await page.locator('.acc__btn').count();
-    ok(count === 17, `${count} questions (11 website + 6 photography)`);
+    ok(count === 18, `${count} questions (10 website + 8 photography)`);
     await page.close();
   }
 

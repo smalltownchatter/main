@@ -6,10 +6,14 @@
  * ─────────────────────────────────────────────────────────────
  */
 import { pkg, money } from './packages';
-import { site, townList } from './site';
+import { site } from './site';
 
 const little = pkg('little-local');
 const main = pkg('main-street');
+
+/** Communities listed in the photography "where" answer. */
+const photoTowns =
+  "Carp, Almonte, Arnprior, Renfrew, Calabogie, Pembroke, Petawawa, Killaloe, Combermere, Barry's Bay and Shawville";
 
 export interface Faq {
   q: string;
@@ -28,10 +32,6 @@ export const websiteFaqs: Faq[] = [
   {
     q: 'How much does a website cost?',
     a: `${little.name} (a one-page website) is <strong>${money(little.price)} all-in</strong>, and ${main.name} (up to five pages) is <strong>${money(main.price)} all-in</strong>. Both include design, copywriting, licensed stock photography, launch setup and applicable tax. If you need something more custom, I'll put together a quote for you before any work starts. You can see everything that's included on the <a href="/websites/#pricing">Websites page</a>.`,
-  },
-  {
-    q: 'Are your prices tax-inclusive?',
-    a: `Yes. ${money(little.price)} and ${money(main.price)} are the final package totals, including any applicable tax. Nothing gets added on top of the advertised package price at the end.`,
   },
   {
     q: 'Do I have to write the website content myself?',
@@ -65,27 +65,35 @@ export const websiteFaqs: Faq[] = [
 
 export const photographyFaqs: Faq[] = [
   {
-    q: 'What types of events do you photograph?',
-    a: `Celebrations of all sizes: baby showers, birthdays and milestone parties, retirement parties, anniversary parties, family gatherings, work holiday parties, community events and fundraisers. If you're planning something that isn't on that list, just ask!`,
+    q: 'Where do you photograph events?',
+    a: `I serve the Ottawa Valley and surrounding area, including ${photoTowns}. If your event is a little farther away, just ask. I'd be happy to chat about it.`,
+  },
+  {
+    q: 'What sort of events do you photograph?',
+    a: `All kinds of celebrations and get-togethers: retirement parties, corporate events, holiday parties, birthday parties, family reunions, baby showers and more. If you're planning something that isn't on that list, just ask!`,
+  },
+  {
+    q: 'How much does event photography cost?',
+    a: `Event photography <strong>starts at $300 for two hours</strong>. The final price depends on things like how many people are attending and how much time you'd like me there. <a href="/contact/?service=event-photography">Tell me about your event</a> and I'll give you a clear price before you book.`,
+  },
+  {
+    q: 'How will I get my photos?',
+    a: `After your event, you'll receive an online gallery of your photos with a link you can share with others, so family, friends and guests can enjoy them too.`,
   },
   {
     q: 'Do you take posed photographs or candid ones?',
     a: `Mostly candid. I love blending into the background and catching the real moments: the laughter, the hugs, the happy tears and all the little details. That said, I'm always happy to take any group photos you'd like, too. We'll talk about your must-have shots before the day.`,
   },
   {
-    q: 'Can I book you for just a few hours?',
-    a: `Yes. Lots of celebrations don't need all-day coverage. We'll talk about your event and decide together how much time makes sense, and your quote will reflect the coverage you choose.`,
-  },
-  {
-    q: 'How much does event photography cost?',
-    a: `Every event is a little different, so photography is quoted individually based on how long the event is, where it's happening and how much coverage you'd like. <a href="/contact/?service=event-photography">Tell me about your event</a> and I'll put together a clear quote for you.`,
-  },
-  {
-    q: 'How far will you travel?',
-    a: `I'm based in the Ottawa Valley and regularly serve ${townList()}, along with the surrounding communities. I'm happy to talk about events farther away, too. Any additional travel costs will be clearly included in your quote, so there are no surprises.`,
+    q: 'Do I need to do anything on the day?',
+    a: `Just enjoy your event! Before the day, we'll chat about the schedule, the people who matter most and any must-have shots. That way I know what to look out for, and you don't have to think about the photos at all.`,
   },
   {
     q: 'How early should I book?',
     a: `As soon as you know your date, it's a good idea to reach out. I can only be in one place at a time, so earlier is better, especially around the holidays. But if your celebration is coming up soon, don't hesitate to ask. If I'm available, I'd love to be there.`,
+  },
+  {
+    q: 'How do I book?',
+    a: `Send me a message through the <a href="/contact/?service=event-photography">contact form</a> with your date, location and a little about your event. I'll get back to you to chat about the details and confirm everything.`,
   },
 ];
