@@ -43,7 +43,7 @@ export const websiteFaqs: Faq[] = [
   },
   {
     q: 'Are there hidden or monthly fees?',
-    a: `No hidden fees, ever. The package price covers building your website. To keep a website online, though, you'll need a domain name (your web address) and hosting, and those come with their own ongoing costs and renewals. Optional future updates or third-party subscriptions (like a booking tool) may also cost extra. I'll walk you through exactly what applies to your website, and what it costs, before you commit to anything.`,
+    a: `No hidden fees, ever. The package price covers building your website. Every website also needs a domain name (your web address) and hosting to stay online. These are usually small yearly costs, and I'll help you set them up. Optional future updates or third-party subscriptions (like a booking tool) may also cost extra. I'll walk you through exactly what applies to your website, and what it costs, before you commit to anything.`,
   },
   {
     q: 'What if I need scheduling or interactive features?',
