@@ -2,10 +2,13 @@
  * ─────────────────────────────────────────────────────────────
  *  WEBSITE PACKAGES — change a price or feature here ONCE and it
  *  updates the homepage preview, the Websites page, the contact
- *  form dropdown, the FAQs and the structured data.
+ *  form dropdown and the structured data (FAQ answers are separate text).
  *  Prices are whole Canadian dollars, final all-in totals.
+ *  The package details live in src/editable/packages.json, which
+ *  can be edited in the dashboard at /admin/.
  * ─────────────────────────────────────────────────────────────
  */
+import data from '../editable/packages.json';
 
 export interface WebsitePackage {
   id: string; // used in contact links, e.g. /contact/?service=little-local
@@ -19,48 +22,7 @@ export interface WebsitePackage {
   cta: string;
 }
 
-export const packages: WebsitePackage[] = [
-  {
-    id: 'little-local',
-    name: 'The Little Local',
-    price: 1000,
-    pages: 'One-page website',
-    summary:
-      'An affordable, polished online home for businesses that need a straightforward website: who you are, what you do and how to reach you.',
-    features: [
-      'Professional custom design',
-      'Copywriting based on information you provide',
-      'Licensed stock photography',
-      'Responsive, mobile-friendly layout',
-      'Business introduction and service information',
-      'Contact details and contact form',
-      'Basic on-page SEO',
-      'One round of revisions',
-      'Website launch setup',
-    ],
-    cta: "Let's Build My Little Local",
-  },
-  {
-    id: 'main-street',
-    name: 'The Main Street',
-    price: 2500,
-    pages: 'Up to five pages',
-    summary:
-      'Room to tell your whole story, with separate pages for your services, your background and the questions customers ask you every week.',
-    includesPrevious: 'Everything in The Little Local, plus:',
-    features: [
-      'Up to five professionally designed pages',
-      'Copywriting for all included pages',
-      'Licensed stock photography throughout',
-      'More detailed services and business information',
-      'Individual page titles and descriptions for search engines',
-      'Two rounds of revisions',
-      'More flexibility in content layout',
-    ],
-    examplePages: 'Home, About, Services, FAQs, Contact',
-    cta: "Let's Build My Main Street",
-  },
-];
+export const packages: WebsitePackage[] = data.packages;
 
 export const pkg = (id: string) => packages.find((p) => p.id === id)!;
 

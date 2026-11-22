@@ -1,27 +1,29 @@
 /**
  * ─────────────────────────────────────────────────────────────
  *  SITE SETTINGS — the one place for business-wide details.
- *  Change the email, towns, tagline or nav here and every page
+ *  Email, towns and tagline live in src/editable/business.json
+ *  (editable at /admin/). Change them there or the nav here and every page
  *  (header, footer, contact page, structured data) updates.
  * ─────────────────────────────────────────────────────────────
  */
 
+import details from '../editable/business.json';
+
 export const site = {
   name: 'Small Town Chatter',
   owner: 'Chelsey',
-  email: 'smalltownchatter@gmail.com',
+  email: details.email,
   region: 'Ottawa Valley',
   province: 'Ontario',
   country: 'Canada',
 
   /** Short lines used in the footer and social previews. */
-  tagline: 'Small-town heart. Professional experience. Good things worth sharing.',
-  description:
-    'Affordable website design and candid event photography throughout the Ottawa Valley.',
-  coreMessage: "Good things happen in small towns. Let's make sure people see them.",
+  tagline: details.tagline,
+  description: details.description,
+  coreMessage: details.coreMessage,
 
   /** Towns listed everywhere the service area appears, in this order. */
-  towns: ['Renfrew', 'Calabogie', 'Arnprior', 'Pembroke', 'Petawawa', "Barry's Bay"],
+  towns: details.towns as string[],
 
   /**
    * Your portrait for the About page.

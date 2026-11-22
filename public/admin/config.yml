@@ -1,0 +1,94 @@
+# ─────────────────────────────────────────────────────────────
+#  WEBSITE EDITOR SETTINGS (Decap CMS)
+#  The editor lives at /admin/. Each save becomes a commit on the
+#  main branch in GitHub, and Netlify rebuilds the live site.
+#  Login: "Login with GitHub", via Netlify's GitHub OAuth provider
+#  (see README → "Editing the site in the browser").
+# ─────────────────────────────────────────────────────────────
+backend:
+  name: github
+  repo: smalltownchatter/main
+  branch: main
+  commit_messages:
+    update: 'Update {{slug}} from the website editor'
+
+site_url: https://smalltownchatter.ca
+display_url: https://smalltownchatter.ca
+logo_url: /favicon.svg
+locale: en
+
+media_folder: src/assets/photos
+public_folder: /src/assets/photos
+
+collections:
+  - name: content
+    label: Website content
+    editor:
+      preview: false
+    files:
+      - name: faqs
+        label: FAQs
+        file: src/editable/faqs.json
+        description: >-
+          The questions on the FAQ page. Drag to reorder. In answers, use **double stars** for bold
+          and [link text](/contact/) for links. Prices written here are plain text, so if you change
+          a package price, update the matching answer too.
+        fields:
+          - label: Website design questions
+            name: websiteFaqs
+            widget: list
+            summary: '{{fields.question}}'
+            collapsed: true
+            fields:
+              - { label: Question, name: question, widget: string }
+              - { label: Answer, name: answer, widget: text }
+          - label: Event photography questions
+            name: photographyFaqs
+            widget: list
+            summary: '{{fields.question}}'
+            collapsed: true
+            fields:
+              - { label: Question, name: question, widget: string }
+              - { label: Answer, name: answer, widget: text }
+
+      - name: packages
+        label: Website packages & prices
+        file: src/editable/packages.json
+        description: >-
+          The two website packages. Prices are whole dollars, all-in (tax included). These update the
+          homepage, Websites page, contact form and search-engine data automatically.
+        fields:
+          - label: Packages
+            name: packages
+            widget: list
+            allow_add: false
+            allow_remove: false
+            allow_reorder: false
+            summary: '{{fields.name}} ({{fields.price}})'
+            fields:
+              - { label: ID (don't change), name: id, widget: hidden }
+              - { label: Package name, name: name, widget: string }
+              - { label: Price (whole dollars), name: price, widget: number, value_type: int, min: 0 }
+              - { label: Pages (short), name: pages, widget: string }
+              - { label: Summary, name: summary, widget: text }
+              - { label: Includes line, name: includesPrevious, widget: string, required: false }
+              - label: Features
+                name: features
+                widget: list
+                field: { label: Feature, name: feature, widget: string }
+              - { label: Example pages, name: examplePages, widget: string, required: false }
+              - { label: Button text, name: cta, widget: string }
+
+      - name: business
+        label: Business details
+        file: src/editable/business.json
+        description: Shown in the header, footer, contact page and search-engine data.
+        fields:
+          - { label: Email address, name: email, widget: string, pattern: ['^[^@\s]+@[^@\s]+\.[^@\s]+$', 'Must be an email address'] }
+          - { label: Tagline (footer), name: tagline, widget: string }
+          - { label: Short description, name: description, widget: text }
+          - { label: Core message, name: coreMessage, widget: string }
+          - label: Towns served
+            name: towns
+            widget: list
+            field: { label: Town, name: town, widget: string }
