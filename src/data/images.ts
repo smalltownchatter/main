@@ -203,10 +203,10 @@ export const photos = {
     w: 1134, h: 1536,
     focus: '50% 50%',
   },
-  'juice-bar-whale-decor': {
-    file: 'juice-bar-whale-decor.jpg',
-    alt: 'A party drink table with fresh juices, fruit-infused water, sliced citrus and whale decorations',
-    w: 2000, h: 1333,
+  'buffet-grilled-cheese-tower': {
+    file: 'buffet-grilled-cheese-tower.jpg',
+    alt: 'A party buffet with a three-tier stand of grilled cheese squares, a silver chafing dish, olives and dips',
+    w: 1600, h: 2000,
   },
 } satisfies Record<string, Photo>;
 
