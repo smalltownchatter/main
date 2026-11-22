@@ -191,6 +191,23 @@ export const photos = {
     w: 1500, h: 2000,
     focus: '50% 40%',
   },
+  'mom-holding-newborn': {
+    file: 'mom-holding-newborn.jpg',
+    alt: 'A smiling woman in a knit hat cuddling a sleeping newborn baby',
+    w: 1503, h: 2000,
+    focus: '50% 35%',
+  },
+  'birthday-girl-cake': {
+    file: 'birthday-girl-cake.jpg',
+    alt: 'A little girl laughing and pointing beside her doll birthday cake',
+    w: 1134, h: 1536,
+    focus: '50% 50%',
+  },
+  'juice-bar-whale-decor': {
+    file: 'juice-bar-whale-decor.jpg',
+    alt: 'A party drink table with fresh juices, fruit-infused water, sliced citrus and whale decorations',
+    w: 2000, h: 1333,
+  },
 } satisfies Record<string, Photo>;
 
 export type PhotoName = keyof typeof photos;

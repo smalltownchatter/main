@@ -47,4 +47,7 @@ These came from Chelsey's "Small Town Chatter / Images" folder on November 21, 2
 | `phone-and-monitor-website.jpg` | About: "My approach" | _to confirm_ |
 | `stone-bridge-autumn-river.jpg` | About: "Proud of where I come from"; Home: photography card (from IMG_8233.HEIC) | Chelsey's own photo? _to confirm_ |
 | `ottawa-valley-coffee-storefront.jpg` | Home: hero main photo (from IMG_7277.HEIC) | Chelsey's own photo? _to confirm_ |
+| `mom-holding-newborn.jpg` | Photography: "milestones" photo (from IMG_1460.HEIC) | Chelsey's own photo? _to confirm_ |
+| `birthday-girl-cake.jpg` | Photography: hero small photo (from IMG_5571.jpg) | Chelsey's own photo? _to confirm_ |
+| `juice-bar-whale-decor.jpg` | Photography: section photo (from DSC_2355.JPG) | Chelsey's own photo? _to confirm_ |
 | `chelsey-portrait.jpg` | About: portrait (from IMG_2331.JPG, location data removed) | Chelsey's own photo |
