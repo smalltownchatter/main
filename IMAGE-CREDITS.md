@@ -54,4 +54,11 @@ These came from Chelsey's "Small Town Chatter / Images" folder on November 21, 2
 | `campfire-at-night.jpg` | Photography: "From my camera" (from fire.jpg) | Chelsey's own photo |
 | `friendship-bracelet-cedar.jpg` | Photography: "little details" (from DSC_1003.JPG) | Chelsey's own photo |
 | `to-the-lake-sign-snow.jpg` | Photography: "From my camera" (from DSC_0543.JPG) | Chelsey's own photo |
+| `bear-lantern-dusk.jpg` | Photography: "From my camera" collage (from IMG_3469.heic) | Chelsey's own photo |
+| `navy-cabin-yellow-door.jpg` | Photography: "From my camera" collage (from IMG_2803.HEIC) | Chelsey's own photo |
+| `calico-cat-on-grass.jpg` | Photography: "From my camera" collage (from DSC_1209.JPG) | Chelsey's own photo |
+| `queen-annes-lace.jpg` | Photography: "From my camera" collage (from DSC_1225.JPG) | Chelsey's own photo |
+| `blue-jay-feather.jpg` | Photography: "From my camera" collage (from DSC_1231.JPG) | Chelsey's own photo |
+| `white-tailed-buck.jpg` | Photography: "From my camera" collage (from DSC_1727.JPG) | Chelsey's own photo |
+| `frosted-autumn-leaves.jpg` | Photography: "From my camera" collage (from DSC_1936.JPG) | Chelsey's own photo |
 | `chelsey-portrait.jpg` | About: portrait (from IMG_2331.JPG, location data removed) | Chelsey's own photo |

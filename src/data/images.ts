@@ -229,6 +229,41 @@ export const photos = {
     alt: 'A hand-painted To the Lake sign on a tree beside a snowy winter trail',
     w: 1800, h: 1200,
   },
+  'bear-lantern-dusk': {
+    file: 'bear-lantern-dusk.jpg',
+    alt: 'A glowing bear-shaped lantern on a lawn at dusk, with mountains and a stone building behind',
+    w: 1307, h: 1600,
+  },
+  'navy-cabin-yellow-door': {
+    file: 'navy-cabin-yellow-door.jpg',
+    alt: 'A small navy cabin with a bright yellow door, tucked among pine trees',
+    w: 1200, h: 1600,
+  },
+  'calico-cat-on-grass': {
+    file: 'calico-cat-on-grass.jpg',
+    alt: 'A fluffy calico cat trotting across the grass toward the camera',
+    w: 1600, h: 1067,
+  },
+  'queen-annes-lace': {
+    file: 'queen-annes-lace.jpg',
+    alt: "Queen Anne's lace and tall grasses at the edge of the woods",
+    w: 1600, h: 1067,
+  },
+  'blue-jay-feather': {
+    file: 'blue-jay-feather.jpg',
+    alt: 'A blue jay feather resting on pine needles and twigs',
+    w: 1600, h: 1067,
+  },
+  'white-tailed-buck': {
+    file: 'white-tailed-buck.jpg',
+    alt: 'A white-tailed buck with antlers at the edge of the woods',
+    w: 1600, h: 1067,
+  },
+  'frosted-autumn-leaves': {
+    file: 'frosted-autumn-leaves.jpg',
+    alt: 'Frost-dusted autumn leaves with a red maple leaf in the middle',
+    w: 1600, h: 1067,
+  },
 } satisfies Record<string, Photo>;
 
 export type PhotoName = keyof typeof photos;
