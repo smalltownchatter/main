@@ -194,13 +194,12 @@ export const photos = {
   'mom-holding-newborn': {
     file: 'mom-holding-newborn.jpg',
     alt: 'A smiling woman in a knit hat cuddling a sleeping newborn baby',
-    w: 1503, h: 2000,
-    focus: '50% 35%',
+    w: 1600, h: 2130,
   },
   'birthday-girl-cake': {
     file: 'birthday-girl-cake.jpg',
     alt: 'A little girl laughing and pointing beside her doll birthday cake',
-    w: 1134, h: 1536,
+    w: 1096, h: 1384,
     focus: '50% 50%',
   },
   'cupcake-dessert-table': {
