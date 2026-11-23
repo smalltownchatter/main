@@ -17,7 +17,7 @@ const little = pkg('little-local');
 const reasons = [
   { icon: 'home', title: 'Small-town roots', text: "I grew up in the Ottawa Valley. I know how much a good reputation and a familiar face mean around here." },
   { icon: 'sparkle', title: '20+ years of experience', text: 'I coded my first website more than two decades ago, and I’ve been building, learning and taking photos ever since.' },
-  { icon: 'tag', title: 'Transparent pricing', text: 'Clear, all-in website packages. If something costs extra, you’ll know before you commit, not after.' },
+  { icon: 'tag', title: 'Transparent pricing', text: 'Clear, one-time website prices. If something costs extra, you’ll know before you commit, not after.' },
   { icon: 'chat', title: 'Straightforward communication', text: 'No jargon, no runaround. Just plain answers from the person actually doing the work.' },
   { icon: 'clock', title: 'Quick, efficient delivery', text: 'A simple process that keeps things moving, so your project doesn’t drag on for months.' },
   { icon: 'heart', title: 'Thoughtful personal service', text: 'You’ll work directly with me from our first chat right through to launch day.' },
@@ -25,24 +25,20 @@ const reasons = [
 ---
 
 <Base
-  title="Small Town Chatter | Ottawa Valley Websites & Photography"
-  description="Affordable small business websites and candid event photography in the Ottawa Valley, Ontario. One-page websites from $1,000 all-in, tax included."
+  title="Renfrew Website Design & Ottawa Valley Event Photographer"
+  description="Small business website design in Renfrew and heartfelt event photography from an Ottawa Valley event photographer. Websites from $1,000, tax included."
 >
   <!-- ─── Hero ─── -->
   <section class="hero" aria-labelledby="hero-title">
     <div class="container hero__grid">
       <div class="hero__text">
-        <p class="eyebrow">Small Town Chatter</p>
+        <p class="eyebrow">Website design and event photography</p>
         <h1 id="hero-title">Small towns. <span class="accent">Big stories.</span></h1>
-        <p class="hero__sub">Helping small-town businesses get found and special moments get remembered.</p>
+        <p class="hero__sub">Affordable website design and heartfelt event photography in the Ottawa Valley.</p>
         <div class="hero__intro">
           <p>
-            Hi, I’m Chelsey! A small-town girl with over 20 years of experience in websites and photography, and a soft
-            spot for the people, businesses and celebrations that make our communities special.
-          </p>
-          <p>
-            I create beautiful, affordable websites for small businesses and capture the little moments that make life’s
-            celebrations unforgettable.
+            I’m Chelsey! I help local businesses get noticed with beautiful, easy-to-use websites, and capture the genuine
+            moments that make life’s celebrations special.
           </p>
           <p class="hero__promise">No unnecessary complications. No hidden fees. Just good, honest work from someone who gets it.</p>
         </div>
@@ -112,7 +108,7 @@ const reasons = [
         <article class="service" aria-labelledby="svc-web">
           <Photo name="boutique-owner" ratio="3/2" class="service__photo" sizes="(min-width: 900px) 46vw, 100vw" />
           <div class="service__body">
-            <p class="service__kicker"><Icon name="laptop" size={20} /> Websites for Small Businesses</p>
+            <p class="service__kicker"><Icon name="laptop" size={20} /> Small business website design in Renfrew</p>
             <h3 id="svc-web">You run the business. I’ll handle the website.</h3>
             <p>
               You’ve already got enough on your plate. I create straightforward, professional websites that help customers
@@ -123,7 +119,7 @@ const reasons = [
               start from a blank page.
             </p>
             <p class="service__price">
-              One-page websites start at <strong>{money(little.price)} all-in</strong>, including applicable tax.
+              One-page websites start at <strong>{money(little.price)}</strong>, a one-time price including applicable tax.
             </p>
             <a class="btn" href="/websites/">Explore Website Design <span class="arrow" aria-hidden="true">→</span></a>
           </div>
@@ -132,7 +128,7 @@ const reasons = [
         <article class="service" aria-labelledby="svc-photo">
           <Photo name="stone-bridge-autumn-river" ratio="3/2" class="service__photo" sizes="(min-width: 900px) 46vw, 100vw" />
           <div class="service__body">
-            <p class="service__kicker"><Icon name="camera" size={20} /> Event Photography</p>
+            <p class="service__kicker"><Icon name="camera" size={20} /> Ottawa Valley event photographer</p>
             <h3 id="svc-photo">You enjoy the moment. I’ll capture it.</h3>
             <p>
               You spend so much time planning a celebration that it’s easy to miss the moments themselves. I blend into the

@@ -2,7 +2,7 @@
 /**
  * EVENT PHOTOGRAPHY PAGE
  * Event types live in src/data/events.ts.
- * Starting price ($300 / two hours) and the shareable online gallery come
+ * Starting price ($500 / three hours, with a library of edited photos) and the shareable online gallery come
  * from Chelsey. No turnaround times or image counts are published yet.
  */
 import Base from '../layouts/Base.astro';
@@ -36,7 +36,7 @@ const schema = [
     name: 'Candid event photography',
     serviceType: 'Event photography',
     description:
-      'Natural, candid photography for baby showers, birthdays, retirement parties, family gatherings, workplace holiday parties and community events. From $300 for two hours.',
+      'Natural, candid photography for baby showers, birthdays, retirement parties, family gatherings, workplace holiday parties and community events. From $500 for three hours, including a library of edited photos.',
     provider: { '@id': siteUrl ? `${siteUrl}/#business` : '#business' },
     areaServed: [...site.towns.map((t) => `${t}, Ontario`), 'Ottawa Valley'],
   },
@@ -44,15 +44,15 @@ const schema = [
 ---
 
 <Base
-  title="Candid Event Photography | Renfrew & Ottawa Valley"
-  description="Natural, candid event photography for baby showers, birthdays, retirement parties, family gatherings and workplace events in Renfrew and across the Ottawa Valley."
+  title="Ottawa Valley Event Photographer | Candid Event Photos"
+  description="Ottawa Valley event photographer for birthdays, baby showers, retirement parties, family reunions and corporate events. From $500 for three hours."
   schema={schema}
 >
   <!-- ─── Hero ─── -->
   <section class="page-hero photo-hero" aria-labelledby="page-title">
     <div class="container split">
       <div>
-        <p class="eyebrow">Event photography</p>
+        <p class="eyebrow">Ottawa Valley event photographer</p>
         <h1 id="page-title">You enjoy the moment. <span class="accent">I’ll make sure you remember it.</span></h1>
         <div class="photo-hero__story">
           <p>
@@ -92,7 +92,7 @@ const schema = [
           photography is my main style, and it’s what I love doing most.
         </p>
       </div>
-      <Photo name="buffet-grilled-cheese-tower" ratio="4/5" sizes="(min-width: 900px) 46vw, 92vw" />
+      <Photo name="cupcake-dessert-table" ratio="3/2" sizes="(min-width: 900px) 46vw, 92vw" />
     </div>
   </section>
 
@@ -191,11 +191,11 @@ const schema = [
           <p class="eyebrow">Pricing</p>
           <h2 id="pricing-title">Every celebration is a little different.</h2>
           <p class="lede">
-            Event photography <strong>starts at $300 for two hours</strong>. The final price depends on things like how many
+            Event photography <strong>starts at $500 for three hours</strong>, including a library of edited photos. The final price depends on things like how many
             people are attending and how much time you’d like me there.
           </p>
           <p class="muted">
-            After your event, you’ll receive an online gallery of your photos with a link you can share with others. Tell me
+            After your event, you’ll receive your edited photos in an online gallery with a link you can share with others. Tell me
             about your plans and I’ll send you a clear, no-pressure quote.
           </p>
         </div>

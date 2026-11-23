@@ -203,10 +203,10 @@ export const photos = {
     w: 1134, h: 1536,
     focus: '50% 50%',
   },
-  'buffet-grilled-cheese-tower': {
-    file: 'buffet-grilled-cheese-tower.jpg',
-    alt: 'A party buffet with a three-tier stand of grilled cheese squares, a silver chafing dish, olives and dips',
-    w: 1600, h: 2000,
+  'cupcake-dessert-table': {
+    file: 'cupcake-dessert-table.jpg',
+    alt: 'Rose-piped cupcakes on glass stands in front of a stone wall, with jugs of juice behind them',
+    w: 1800, h: 1200,
   },
 } satisfies Record<string, Photo>;
 

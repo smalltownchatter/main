@@ -11,6 +11,17 @@ import ServiceArea from '../components/ServiceArea.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { packages, money } from '../data/packages';
 import { site, siteUrl } from '../data/site';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+/* "Some of my work": a project only shows once its screenshot is in src/assets/work/. */
+const shots = import.meta.glob<{ default: ImageMetadata }>('/src/assets/work/*.{jpg,png,webp}', { eager: true });
+const work = [
+  { name: 'Itty Bitty Woodlands', url: 'https://www.ittybittywoodlands.com', domain: 'ittybittywoodlands.com', file: 'ittybittywoodlands' },
+  { name: 'Itty Bitty Pause', url: 'https://www.ittybittypause.com', domain: 'ittybittypause.com', file: 'ittybittypause' },
+]
+  .map((w) => ({ ...w, img: Object.entries(shots).find(([k]) => k.includes(`/${w.file}.`))?.[1].default }))
+  .filter((w) => w.img);
 
 const why = [
   { icon: 'search', title: 'Get found', text: 'Show up when people search for what you do, and for your business by name.' },
@@ -60,15 +71,15 @@ const schema = [
 ---
 
 <Base
-  title="Affordable Small Business Website Design | Ottawa Valley"
-  description="Affordable small business website design in Renfrew, Arnprior, Pembroke, Petawawa, Calabogie & Barry's Bay. Copywriting and photos included, from $1,000 all-in."
+  title="Small Business Website Design in Renfrew | Ottawa Valley"
+  description="Small business website design in Renfrew, Arnprior, Pembroke, Petawawa and across the Ottawa Valley. Copywriting and photos included, from $1,000, tax included."
   schema={schema}
 >
   <!-- ─── Hero ─── -->
   <section class="page-hero web-hero" aria-labelledby="page-title">
     <div class="container split">
       <div>
-        <p class="eyebrow">Website design for small businesses</p>
+        <p class="eyebrow">Small business website design in Renfrew &amp; the Ottawa Valley</p>
         <h1 id="page-title">A website that works hard, <span class="accent">so you don’t have to.</span></h1>
         <p class="lede">
           You didn’t start your business because you wanted to spend your evenings updating a website. You started it
@@ -87,7 +98,7 @@ const schema = [
         <Photo name="storefront-open-sign" ratio="4/5" eager sizes="(min-width: 900px) 42vw, 92vw" />
         <p class="web-hero__badge">
           <span class="web-hero__badge-num">{money(packages[0].price)}</span>
-          <span>one-page websites, all-in</span>
+          <span>one-page websites, tax included</span>
         </p>
       </div>
     </div>
@@ -155,8 +166,8 @@ const schema = [
     <div class="container">
       <div class="section-head center">
         <p class="eyebrow">Website packages</p>
-        <h2 id="pricing-title">Honest prices, <span class="accent">all-in.</span></h2>
-        <p>Two simple packages. All prices are in Canadian dollars and include applicable tax.</p>
+        <h2 id="pricing-title">Honest prices, <span class="accent">no surprises.</span></h2>
+        <p>One-time website design price, including applicable tax. Domain and hosting costs are separate.</p>
       </div>
 
       <div class="pricing__grid">
@@ -164,7 +175,7 @@ const schema = [
       </div>
 
       <div class="transparency" aria-labelledby="transparency-title">
-        <h3 id="transparency-title"><Icon name="tag" size={22} /> What “all-in” means</h3>
+        <h3 id="transparency-title"><Icon name="tag" size={22} /> What the price covers</h3>
         <div class="transparency__cols">
           <div>
             <h4>Included in the package price</h4>
@@ -194,6 +205,32 @@ const schema = [
       </div>
     </div>
   </section>
+
+  <!-- ─── Some of my work ─── -->
+  {
+    work.length > 0 && (
+      <section class="section work" aria-labelledby="work-title">
+        <div class="container">
+          <div class="section-head center">
+            <p class="eyebrow">Portfolio</p>
+            <h2 id="work-title">Some of <span class="accent">my work</span></h2>
+          </div>
+          <div class="work__grid">
+            {work.map((w) => (
+              <a class="work__card" href={w.url} target="_blank" rel="noopener">
+                <span class="work__frame">
+                  <span class="work__bar" aria-hidden="true"><i></i><i></i><i></i></span>
+                  <Image src={w.img!} alt={`Screenshot of the ${w.name} website homepage`} widths={[560, 840, 1120]} sizes="(min-width: 900px) 46vw, 92vw" class="work__img" />
+                </span>
+                <span class="work__name">{w.name}</span>
+                <span class="work__domain">{w.domain} <span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   <!-- ─── Custom functionality ─── -->
   <section class="section" aria-labelledby="custom-title">
@@ -284,6 +321,69 @@ const schema = [
 </Base>
 
 <style>
+  .work__grid {
+    display: grid;
+    gap: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  }
+  @media (min-width: 760px) {
+    .work__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .work__card {
+    display: grid;
+    gap: 0.35rem;
+    color: var(--charcoal);
+    text-decoration: none;
+  }
+  .work__frame {
+    display: block;
+    border: 1px solid var(--taupe);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--white);
+    box-shadow: var(--shadow);
+    margin-bottom: 0.75rem;
+    transition: transform 0.2s ease;
+  }
+  .work__card:hover .work__frame {
+    transform: translateY(-3px);
+  }
+  .work__bar {
+    display: flex;
+    gap: 6px;
+    padding: 0.6rem 0.8rem;
+    background: var(--paper);
+    border-bottom: 1px solid var(--taupe);
+  }
+  .work__bar i {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--taupe);
+  }
+  .work__frame :global(.work__img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top;
+  }
+  .work__name {
+    font-family: var(--font-serif);
+    font-size: var(--step-2);
+  }
+  .work__domain {
+    color: var(--terra-deep);
+    font-weight: 600;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .work__frame {
+      transition: none;
+    }
+  }
+
   .web-hero {
     background: radial-gradient(900px 500px at 0% 0%, var(--sage-tint), transparent 60%), var(--ivory);
   }

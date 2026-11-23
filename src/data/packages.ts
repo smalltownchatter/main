@@ -3,7 +3,7 @@
  *  WEBSITE PACKAGES — change a price or feature here ONCE and it
  *  updates the homepage preview, the Websites page, the contact
  *  form dropdown and the structured data (FAQ answers are separate text).
- *  Prices are whole Canadian dollars, final all-in totals.
+ *  Prices are whole Canadian dollars, one-time totals including tax.
  *  The package details live in src/editable/packages.json, which
  *  can be edited in the dashboard at /admin/.
  * ─────────────────────────────────────────────────────────────
