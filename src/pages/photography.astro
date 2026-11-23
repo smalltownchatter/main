@@ -183,20 +183,6 @@ const schema = [
     </div>
   </section>
 
-  <!-- ─── From my camera ─── -->
-  <section class="section gallery" aria-labelledby="gallery-title">
-    <div class="container">
-      <div class="section-head center">
-        <p class="eyebrow">From my camera</p>
-        <h2 id="gallery-title">A few more <span class="accent">moments I’ve captured</span></h2>
-      </div>
-      <div class="gallery__grid">
-        <Photo name="campfire-at-night" ratio="3/2" sizes="(min-width: 760px) 46vw, 92vw" />
-        <Photo name="to-the-lake-sign-snow" ratio="3/2" sizes="(min-width: 760px) 46vw, 92vw" />
-      </div>
-    </div>
-  </section>
-
   <!-- ─── Pricing ─── -->
   <section class="section" aria-labelledby="pricing-title">
     <div class="container">
@@ -214,6 +200,20 @@ const schema = [
           </p>
         </div>
         <a class="btn btn--accent" href="/contact/?service=event-photography">Request a Photography Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── From my camera ─── -->
+  <section class="section gallery" aria-labelledby="gallery-title">
+    <div class="container">
+      <div class="section-head center">
+        <p class="eyebrow">From my camera</p>
+        <h2 id="gallery-title">A few more <span class="accent">moments I’ve captured</span></h2>
+      </div>
+      <div class="gallery__grid">
+        <Photo name="campfire-at-night" ratio="3/2" sizes="(min-width: 760px) 46vw, 92vw" />
+        <Photo name="to-the-lake-sign-snow" ratio="3/2" sizes="(min-width: 760px) 46vw, 92vw" />
       </div>
     </div>
   </section>
@@ -241,6 +241,9 @@ const schema = [
 </Base>
 
 <style>
+  .gallery {
+    padding-top: calc(var(--section) * 0.4);
+  }
   .gallery__grid {
     display: grid;
     gap: clamp(1rem, 0.75rem + 1.5vw, 1.75rem);
