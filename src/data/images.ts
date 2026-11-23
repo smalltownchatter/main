@@ -187,9 +187,9 @@ export const photos = {
   },
   'ottawa-valley-coffee-storefront': {
     file: 'ottawa-valley-coffee-storefront.jpg',
-    alt: 'The Ottawa Valley Coffee storefront decorated with Christmas lights and trees on a snowy winter day',
-    w: 1500, h: 2000,
-    focus: '50% 40%',
+    alt: 'The Ottawa Valley Coffee storefront glowing with Christmas lights and decorated trees on a snowy winter evening',
+    w: 1800, h: 1556,
+    focus: '45% 50%',
   },
   'mom-holding-newborn': {
     file: 'mom-holding-newborn.jpg',
