@@ -18,7 +18,7 @@ import type { ImageMetadata } from 'astro';
 const shots = import.meta.glob<{ default: ImageMetadata }>('/src/assets/work/*.{jpg,png,webp}', { eager: true });
 const work = [
   { name: 'Itty Bitty Woodlands', url: 'https://www.ittybittywoodlands.com', domain: 'ittybittywoodlands.com', file: 'ittybittywoodlands' },
-  { name: 'Itty Bitty Pause', url: 'https://www.ittybittypause.com', domain: 'ittybittypause.com', file: 'ittybittypause' },
+  { name: 'Itty Bitty Pause', url: 'https://ittybittypause.square.site', domain: 'ittybittypause.square.site', file: 'ittybittypause' },
 ]
   .map((w) => ({ ...w, img: Object.entries(shots).find(([k]) => k.includes(`/${w.file}.`))?.[1].default }))
   .filter((w) => w.img);
