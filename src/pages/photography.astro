@@ -70,7 +70,7 @@ const schema = [
         </div>
       </div>
       <div class="photo-hero__art">
-        <Photo name="celebration-table-lilacs" ratio="4/5" eager class="photo-hero__main" sizes="(min-width: 900px) 40vw, 90vw" />
+        <Photo name="kids-by-the-pond" ratio="4/5" eager class="photo-hero__main" sizes="(min-width: 900px) 40vw, 90vw" />
         <Photo name="birthday-girl-cake" ratio="3/4" class="photo-hero__small" sizes="(min-width: 900px) 15vw, 36vw" />
       </div>
     </div>
@@ -154,7 +154,7 @@ const schema = [
           a point of photographing them early, before the candles burn down and the cake gets cut.
         </p>
       </div>
-      <Photo name="candlelit-table-roses" ratio="5/4" sizes="(min-width: 900px) 46vw, 92vw" />
+      <Photo name="friendship-bracelet-cedar" ratio="5/4" sizes="(min-width: 900px) 46vw, 92vw" />
     </div>
   </section>
 
@@ -180,6 +180,20 @@ const schema = [
           ))
         }
       </ol>
+    </div>
+  </section>
+
+  <!-- ─── From my camera ─── -->
+  <section class="section gallery" aria-labelledby="gallery-title">
+    <div class="container">
+      <div class="section-head center">
+        <p class="eyebrow">From my camera</p>
+        <h2 id="gallery-title">A few more <span class="accent">moments I’ve captured</span></h2>
+      </div>
+      <div class="gallery__grid">
+        <Photo name="campfire-at-night" ratio="3/2" sizes="(min-width: 760px) 46vw, 92vw" />
+        <Photo name="to-the-lake-sign-snow" ratio="3/2" sizes="(min-width: 760px) 46vw, 92vw" />
+      </div>
     </div>
   </section>
 
@@ -227,6 +241,15 @@ const schema = [
 </Base>
 
 <style>
+  .gallery__grid {
+    display: grid;
+    gap: clamp(1rem, 0.75rem + 1.5vw, 1.75rem);
+  }
+  @media (min-width: 760px) {
+    .gallery__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
   .photo-hero {
     background: radial-gradient(900px 520px at 100% 10%, var(--blush-soft), transparent 62%), var(--ivory);
   }

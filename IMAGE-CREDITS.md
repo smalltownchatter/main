@@ -50,4 +50,8 @@ These came from Chelsey's "Small Town Chatter / Images" folder on November 21, 2
 | `mom-holding-newborn.jpg` | Photography: "milestones" photo (from IMG_1460.HEIC) | Chelsey's own photo? _to confirm_ |
 | `birthday-girl-cake.jpg` | Photography: hero small photo (from IMG_5571.jpg) | Chelsey's own photo? _to confirm_ |
 | `cupcake-dessert-table.jpg` | Photography: style section photo (supplied 2026-11-23) | Chelsey's own photo? _to confirm_ |
+| `kids-by-the-pond.jpg` | Photography: hero main photo (from Nyah.jpg) | Chelsey's own photo |
+| `campfire-at-night.jpg` | Photography: "From my camera" (from fire.jpg) | Chelsey's own photo |
+| `friendship-bracelet-cedar.jpg` | Photography: "little details" (from DSC_1003.JPG) | Chelsey's own photo |
+| `to-the-lake-sign-snow.jpg` | Photography: "From my camera" (from DSC_0543.JPG) | Chelsey's own photo |
 | `chelsey-portrait.jpg` | About: portrait (from IMG_2331.JPG, location data removed) | Chelsey's own photo |

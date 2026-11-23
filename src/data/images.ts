@@ -207,6 +207,28 @@ export const photos = {
     alt: 'Rose-piped cupcakes on glass stands in front of a stone wall, with jugs of juice behind them',
     w: 1800, h: 1200,
   },
+  'kids-by-the-pond': {
+    file: 'kids-by-the-pond.jpg',
+    alt: 'A girl leaning down to whisper to her little brother beside a pond on a summer evening',
+    w: 1800, h: 1510,
+    focus: '70% 60%',
+  },
+  'campfire-at-night': {
+    file: 'campfire-at-night.jpg',
+    alt: 'A crackling campfire at night, ringed by logs and outdoor chairs',
+    w: 1800, h: 1200,
+  },
+  'friendship-bracelet-cedar': {
+    file: 'friendship-bracelet-cedar.jpg',
+    alt: 'A beaded friendship bracelet hanging from a cedar branch, with hills in the distance',
+    w: 1800, h: 1200,
+    focus: '20% 50%',
+  },
+  'to-the-lake-sign-snow': {
+    file: 'to-the-lake-sign-snow.jpg',
+    alt: 'A hand-painted To the Lake sign on a tree beside a snowy winter trail',
+    w: 1800, h: 1200,
+  },
 } satisfies Record<string, Photo>;
 
 export type PhotoName = keyof typeof photos;
